@@ -5,7 +5,16 @@
   "main": "gulpfile.js",
   "dependencies": {},
   "devDependencies": {
-    "gulp-require-tasks": "^1.0.3"
+    "beepbeep": "^1.2.0",
+    "browser-sync": "^2.13.0",
+    "deep-assign": "^2.0.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-load-plugins": "^1.2.4",
+    "gulp-plumber": "^1.1.0",
+    "gulp-require-tasks": "^1.0.3",
+    "gulp-sass": "^2.3.2",
+    "gulp-scss-lint": "^0.4.0",
+    "gulp-sourcemaps": "^1.6.0"
   },
   "scripts": {
     "postinstall": "node scripts/install.js",
