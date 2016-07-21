@@ -1,0 +1,24 @@
+{
+  "name": "front-end-toolkit",
+  "version": "1.0.0",
+  "description": "Toolkit for creating and working with assets",
+  "main": "gulpfile.js",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp-require-tasks": "^1.0.3"
+  },
+  "scripts": {
+    "postinstall": "node scripts/install.js",
+    "uninstall": "node scripts/uninstall.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Insydebv/front-end-toolkit.git"
+  },
+  "author": "Maarten van Spil <maarten@insyde.nl>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Insydebv/front-end-toolkit/issues"
+  },
+  "homepage": "https://github.com/Insydebv/front-end-toolkit#readme"
+}
