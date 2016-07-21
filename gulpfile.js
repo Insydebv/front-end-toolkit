@@ -4,9 +4,8 @@ var plugins = require('gulp-load-plugins')({
 	pattern: '*'
 });
 
-
 // Define options
-var options = plugins.deepAssign(require('./gulpconfig.js')(), {
+var options = plugins.deepAssign(require('./config.js')(), {
 	"sassIncludePaths": [
 		'bower_components/foundation/scss',
 	],

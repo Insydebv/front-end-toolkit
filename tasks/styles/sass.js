@@ -1,3 +1,4 @@
+// Throw a nice error with a sound effect
 var onSassError = function(error) {
 	plugins.util.log('Sass Error', plugins.util.colors.red('123'));
 	plugins.beepbeep();
@@ -5,6 +6,7 @@ var onSassError = function(error) {
 	this.emit('end');
 }
 
+// Generate CSS
 module.exports = {
   fn: function (gulp, plugins, options, callback) {
     return gulp.src(options.paths.stylesSrc, { base: 'src/styles' })
