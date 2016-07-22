@@ -21,7 +21,7 @@ module.exports = {
 			}))
 			.pipe(plugins.autoprefixer({browsers: ['last 3 versions']}))
 			.pipe(plugins.sourcemaps.write('./map'))
-			.pipe(gulp.dest(options.paths.stylesDest))
+			.pipe(gulp.dest(options.paths.appRoot + options.paths.stylesDest))
 			.pipe(plugins.browserSync.stream({match: '**/*.css'}))
 			;
 	}
