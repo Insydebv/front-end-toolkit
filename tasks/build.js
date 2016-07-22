@@ -1,6 +1,7 @@
 // Build everything
+var gulpSequence = require('gulp-sequence');
 module.exports = {
-	fn: function (gulp, plugins, options, callback) {
-		plugins.sequence(['bower', 'styles'], 'fonts', 'scripts');
+	nativeTask: function (gulp) {
+		gulpSequence(['bower', 'styles'], 'fonts', 'scripts', gulp)
 	}
 };

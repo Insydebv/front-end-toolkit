@@ -1,6 +1,7 @@
 // Build styles
+var gulpSequence = require('gulp-sequence');
 module.exports = {
-	fn: function (gulp, plugins, options, callback) {
-		plugins.sequence(['styles:sass-index', 'styles:sass'])
+	nativeTask: function (gulp) {
+		gulpSequence(['styles:sass-index', 'styles:sass'], gulp)
 	}
 };
