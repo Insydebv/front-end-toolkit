@@ -16,7 +16,7 @@ module.exports = function() {
       "stylesSrc"           : "src/styles/styles.scss",
       "stylesComponentsSrc" : 'src/styles/components/',
       "stylesDest"          : "/css",
-	  "scssLintConfig"      : __dirname__ + "/node_modules/scss-styleguide/.scss-lint.yml",
+	  "scssLintConfig"      : __dirname + "/node_modules/scss-styleguide/.scss-lint.yml",
     },
     "sassIncludePaths": [],
 	"bowerAssetFileTypes": "**/*.{png,gif,svg,jpeg,jpg,woff,woff2,eot,ttf,otf}",
