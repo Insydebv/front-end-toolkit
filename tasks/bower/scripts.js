@@ -5,10 +5,10 @@ module.exports = {
 			.pipe(plugins.sourcemaps.init())
 			.pipe(plugins.filter('*.js'))
 			.pipe(plugins.babel())
-			.pipe(plugins.concat(options.bowerScriptFileName))
+			.pipe(plugins.concat(options.bowerScriptFile))
 			.pipe(plugins.uglify())
 			.pipe(plugins.sourcemaps.write('maps'))
-			.pipe(gulp.dest(options.paths.scriptDest))
+			.pipe(gulp.dest(options.paths.appRoot + options.paths.scriptDest))
 		;
 	}
 };

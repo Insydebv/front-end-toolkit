@@ -3,6 +3,6 @@ module.exports = {
 	fn: function (gulp, plugins, options, callback) {
 		return gulp.src(plugins.mainBowerFiles(), {base: options.paths.bowerSrc})
 			.pipe(plugins.filter(options.bowerAssetFileTypes))
-			.pipe(gulp.dest(options.paths.bowerAssetsDest));
+			.pipe(gulp.dest(options.paths.appRoot + options.paths.bowerAssetsDest));
 	}
 };

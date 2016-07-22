@@ -6,7 +6,7 @@ module.exports = {
 			.pipe(plugins.filter('**/*.js'))
 			.pipe(plugins.uglify())
 			.pipe(plugins.sourcemaps.write('maps'))
-			.pipe(gulp.dest(scriptDest))
+			.pipe(gulp.dest(options.paths.appRoot + options.paths.scriptDest))
 			;
 	}
 };

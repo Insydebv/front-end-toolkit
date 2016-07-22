@@ -1,6 +1,9 @@
 // Generate Bower SCSS from source CSS with corrected asset paths
 gulp.task('bower:styles', function () {
-	var bowerDist = config.appRoot;
+	var bowerAssetsDest = config.paths.bowerAssetsDest;
+	if (str.substring(0, 1) == '/') {
+		bowerAssetsDest = bowerAssetsDest.substring(1);
+	}
 	return gulp.src(plugins.mainBowerFiles(), {base: options.paths.bowerSrc})
 		.pipe(plugins.filter([
 			'**/*.css'
@@ -15,18 +18,18 @@ gulp.task('bower:styles', function () {
 						fullUrl = fullUrl.split("?");
 						if (fs.existsSync(fullUrl[0])) {
 							bowerCopyFiles.push(fullUrl[0]);
-							return slash(path.relative('css', fullUrl[0]).replace(/bower_components/, 'dist') + '?' + fullUrl[1]);
+							return slash(path.relative('css', fullUrl[0]).replace(/bower_components/, bowerAssetsDest) + '?' + fullUrl[1]);
 						}
 					}
 					else {
 						if (fs.existsSync(fullUrl)) {
 							bowerCopyFiles.push(fullUrl);
-							return slash(path.relative('css', fullUrl).replace(/bower_components/, 'dist'));
+							return slash(path.relative('css', fullUrl).replace(/bower_components/, bowerAssetsDest));
 						}
 					}
 					return url;
 				})));
 		}))
-		.pipe(plugins.concat(options.bowerStylesFileName))
-		.pipe(gulp.dest(options.paths.bowerStylesDest));
+		.pipe(plugins.concat(options.bowerStylesFile))
+		.pipe(gulp.dest(options.paths.appRoot + options.paths.bowerStylesDest));
 });
