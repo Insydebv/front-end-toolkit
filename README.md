@@ -1,5 +1,5 @@
-# front-end-toolkit
-For creating and working with assets
+# Front-end Toolkit
+A scalable modular assets pipeline
 
 ## Usage
 `npm install https://github.com/Insydebv/front-end-toolkit.git --save-dev`
@@ -12,3 +12,9 @@ require('front-end-toolkit')(gulp);
 ```
 
 run `gulp -T` for a list of available commands
+
+## Features
+- Feature 1
+- Feature 2
+- Feature 3
+- etc...
