@@ -1,7 +1,8 @@
 // Load modules
 var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')({
-	pattern: '*'
+	// all, but exclude modules that have occurences like 'jshint' and 'gulp-jshint'
+	pattern: ['*', '!jshint']
 });
 
 // Define options

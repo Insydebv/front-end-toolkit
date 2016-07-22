@@ -10,7 +10,7 @@ module.exports = {
 			.pipe(plugins.babel())
 			.pipe(plugins.uglify())
 			.pipe(plugins.sourcemaps.write('maps'))
-			.pipe(gulp.dest(options.paths.appRoot + scriptDest))
+			.pipe(gulp.dest(options.paths.appRoot + options.paths.scriptDest))
 			;
 	}
 };

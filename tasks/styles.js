@@ -1,4 +1,4 @@
 // Build styles
 module.exports = {
-	nativeTask: plugins.sequence(['styles:sass-index', 'styles:sass'])
+	fn: plugins.sequence(['styles:sass-index', 'styles:sass'])
 };
