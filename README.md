@@ -14,7 +14,7 @@ require('front-end-toolkit')(gulp);
 run `gulp -T` for a list of available commands
 
 ## Features
-- Feature 1
+- Gulp
 - Feature 2
 - Feature 3
 - etc...
@@ -30,3 +30,14 @@ Put these in a config object.
 | passGulp     | `true`            | Whether to pass Gulp instance as a first argument to your task function
 | passCallback | `true`            | Whether to pass task callback function as a last argument to your task function
 | gulp         | `require('gulp')` | You could pass your existing Gulp instance if you have one
+
+
+## Babel
+By default scripts are parsed by `gulp-babel`. 
+You can supply a configuration by creating a `.babelrc` file in the root of your project.
+```json
+{
+  "presets": ["es2015-without-strict"],
+  "compact": true
+}
+```

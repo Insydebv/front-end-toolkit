@@ -4,6 +4,6 @@ module.exports = {
 		return gulp.src(options.paths.fontSrc)
 			.pipe(plugins.newer(options.paths.appRoot + options.paths.fontDest))
 			.pipe(gulp.dest(options.paths.appRoot + options.paths.fontDest))
-		;
+			;
 	}
 };

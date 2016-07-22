@@ -1,11 +1,15 @@
 // Generate Bower SCSS from source CSS with corrected asset paths
+var path = require('path');
+var slash = require('slash');
+var fs = require('fs');
+
 module.exports = {
 	fn: function (gulp, plugins, options, callback) {
 
-		var bowerCopyFiles 	= [];
-		var bowerAssetsDest = config.paths.bowerAssetsDest;
+		var bowerCopyFiles = [];
+		var bowerAssetsDest = options.paths.bowerAssetsDest;
 
-		if (str.substring(0, 1) == '/') {
+		if (bowerAssetsDest.substring(0, 1) == '/') {
 			bowerAssetsDest = bowerAssetsDest.substring(1);
 		}
 
@@ -17,7 +21,7 @@ module.exports = {
 				var dirName = path.dirname(file.path);
 
 				return stream
-					.pipe(plugins.rework(reworkUrl(function (url) {
+					.pipe(plugins.rework(plugins.reworkPluginUrl(function (url) {
 						var fullUrl = path.join(dirName, url);
 						if (fullUrl.indexOf("?") > -1) {
 							fullUrl = fullUrl.split("?");
@@ -36,6 +40,6 @@ module.exports = {
 					})));
 			}))
 			.pipe(plugins.concat(options.bowerStylesFile))
-			.pipe(gulp.dest(options.paths.appRoot + options.paths.bowerStylesDest));
+			.pipe(gulp.dest(options.paths.bowerStylesDest));
 	}
 };

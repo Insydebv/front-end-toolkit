@@ -25,6 +25,6 @@ module.exports = {
 			.pipe(plugins.sourcemaps.write('./map'))
 			.pipe(gulp.dest(options.paths))
 			.pipe(plugins.browserSync.stream({match: '**/*.css'}))
-		;
+			;
 	}
 };
