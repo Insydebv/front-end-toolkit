@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "Toolkit for creating and working with assets",
   "main": "gulpfile.js",
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "beepbeep": "^1.2.0",
     "browser-sync": "^2.13.0",
     "deep-assign": "^2.0.0",
@@ -18,6 +17,7 @@
     "gulp-sourcemaps": "^1.6.0",
     "scss-styleguide": "git+https://github.com/Insydebv/scss-styleguide.git"
   },
+  "devDependencies": {},
   "scripts": {
     "postinstall": "node scripts/install.js",
     "uninstall": "node scripts/uninstall.js"
