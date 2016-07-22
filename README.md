@@ -1,5 +1,5 @@
 # Front-end Toolkit
-A scalable modular assets pipeline
+A scalable modular Gulp based assets pipeline
 
 ## Usage
 `npm install https://github.com/Insydebv/front-end-toolkit.git --save-dev`
