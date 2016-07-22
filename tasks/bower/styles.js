@@ -13,7 +13,7 @@ module.exports = {
 			.pipe(plugins.filter([
 				'**/*.css'
 			]))
-			.pipe(plugins.foreach(function (stream, file) {
+			.pipe(plugins.flatmap(function (stream, file) {
 				var dirName = path.dirname(file.path);
 
 				return stream
