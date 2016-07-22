@@ -17,6 +17,7 @@ module.exports = function() {
       "stylesComponentsSrc" : 'src/styles/components/',
       "stylesDest"          : "css",
 	  "scssLintConfig"      : "node_modules/scss-styleguide/.scss-lint.yml",
+	  "htdocs"              : "d:\\php\\",
     },
     "sassIncludePaths": [],
 	"bowerAssetFileTypes": "**/*.{png,gif,svg,jpeg,jpg,woff,woff2,eot,ttf,otf}",

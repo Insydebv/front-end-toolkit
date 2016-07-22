@@ -16,6 +16,6 @@ module.exports = {
 			'templates/**/*.html',
 			'site/protected/views/**/*.php',
 			'site/protected/widgets/**/*.php',
-		]).on('change', browserSync.reload);
+		]).on('change', plugins.browserSync.reload);
 	}
 };
