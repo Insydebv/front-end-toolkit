@@ -2,7 +2,9 @@
 module.exports = {
 	fn: function (gulp, plugins, options, callback) {
 
+		var bowerCopyFiles 	= [];
 		var bowerAssetsDest = config.paths.bowerAssetsDest;
+
 		if (str.substring(0, 1) == '/') {
 			bowerAssetsDest = bowerAssetsDest.substring(1);
 		}
