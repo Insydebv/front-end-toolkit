@@ -34,7 +34,9 @@ var options = plugins.deepAssign(require('./config.js')(), {
 });
 
 // Load tasks
-plugins.requireTasks({
-	path: __dirname + '/tasks',
-	arguments: [plugins, options],
-});
+module.exports = function(gulp){
+	plugins.requireTasks({
+		path: __dirname + '/tasks',
+		arguments: [plugins, options],
+	});
+};
