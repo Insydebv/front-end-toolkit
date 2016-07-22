@@ -3,7 +3,7 @@ module.exports = function() {
     "paths" : {
       "appRoot"				: "site/",
       "bowerSrc"            : "bower_components",
-      "bowerAssetsDest"     :  "dist",
+      "bowerAssetsDest"     : "dist",
       "bowerStylesDest"     : "src/styles",
       "imgSrc"              : "src/images/**",
       "imgDest"             : "images",
@@ -11,7 +11,7 @@ module.exports = function() {
       "fontDest"            : "fonts",
       "headScriptSrc"       : ["src/script/head/**/*.js"],
       "pageScriptSrc"       : ["src/script/page/**/*.js"],
-	  "scriptSrc"           : ["src/script/**/*.js", "!headScriptSrc", "!pageScriptSrc"],
+	  "scriptSrc"           : ["src/script/*.js"],
 	  "scriptDest"          : "script",
       "stylesSrc"           : "src/styles/styles.scss",
       "stylesComponentsSrc" : 'src/styles/components/',

@@ -2,6 +2,8 @@
 module.exports = {
 	fn: function (gulp, plugins, options, callback) {
 		return gulp.src(options.paths.headScriptSrc)
+			.pipe(plugins.jshint())
+			.pipe(plugins.jshint.reporter(plugins.jshintStylish))
 			.pipe(plugins.sourcemaps.init())
 			.pipe(plugins.filter('**/*.js'))
 			.pipe(plugins.concat(options.headScriptFile))

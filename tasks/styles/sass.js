@@ -8,22 +8,20 @@ var onSassError = function (error) {
 
 // Generate CSS
 module.exports = {
+	dep: ['lint:styles'],
 	fn: function (gulp, plugins, options, callback) {
 		return gulp.src(options.paths.stylesSrc, {base: 'src/styles'})
 			.pipe(plugins.plumber({
 				errorHandler: onSassError
-			}))
-			.pipe(plugins.scssLint({
-				'config': '.scss-lint.yml'
 			}))
 			.pipe(plugins.sourcemaps.init())
 			.pipe(plugins.sass({
 				includePaths: options.sassIncludePaths,
 				outputStyle: 'compressed'
 			}))
-			.pipe(plugins.autoprefixer({browsers: ['last 5 versions']}))
+			.pipe(plugins.autoprefixer({browsers: ['last 3 versions']}))
 			.pipe(plugins.sourcemaps.write('./map'))
-			.pipe(gulp.dest(options.paths))
+			.pipe(gulp.dest(options.paths.stylesDest))
 			.pipe(plugins.browserSync.stream({match: '**/*.css'}))
 			;
 	}
