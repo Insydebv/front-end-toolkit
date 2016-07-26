@@ -50,8 +50,8 @@ require('front-end-toolkit')(gulp, options);
 **bower**|`object`|
 assetFileTypes|`"png,gif,svg,jpeg,jpg,woff,woff2,eot,ttf,otf"`|Comma separated list of filetypes
 scriptFile    |`"bower.min.js"`|Filename for concatenated bower scripts
-stylesFile    |`"\_bower.scss"`|Filename for concatenated bower styles
-src           |`"bower\_components"`|Location of bower components
+stylesFile    |`"_bower.scss"`|Filename for concatenated bower styles
+src           |`"bower_components"`|Location of bower components
 assetsDest    |`"site/dist"`|Where to copy bower assets for distribution
 **fonts**|`object`|
 src           |`"src/fonts/**/*"`|Fonts source dir
@@ -71,14 +71,14 @@ src|`["src/styles/styles.scss"]`|Stylesheets that are parsed
 srcFolder        |`"src/styles"`|Stylesheets source folder
 componentsSrc|`"src/styles/components"`|Location of styles components
 dest         |`"site/css"`|Distribution css dir
-lintConfig     |`"node\_modules/scss-styleguide/.scss-lint.yml"`|Scss-lint config
+lintConfig     |`"node_modules/scss-styleguide/.scss-lint.yml"`|Scss-lint config
 includePaths   |`["bower-components"]`|Sass includepaths
 outputStyle    |`"compressed"`|Sass outputstyle
 **sprite**|`object`|
 src|`"src/images/sprite"`|Sprite source folder
 dest|`"site/images/sprite.png"`|Non retina sprite image location
 retinaDest|`"site/images/sprite@2x.png"`|Retina sprite image location
-scssDest|`"../src/styles/\_sprite.scss"`|Sprite SCSS source destination (include in styles.scss)
+scssDest|`"../src/styles/_sprite.scss"`|Sprite SCSS source destination (include in styles.scss)
 imgPath|`"../images/sprite.png"`|Non retina sprite image path for CSS
 retinaImgPath|`"../images/sprite@2x.png"`|Retina sprite image path for CSS
 retinaSrcFilter|`"**/*@2x.png"`|Retina SRC filter
