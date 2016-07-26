@@ -28,7 +28,7 @@ module.exports = function () {
 		"styles": {
 			"src"          		: ["src/styles/styles.scss"],
 			"srcFolder"        	: "src/styles",
-			"componentsSrc"		: 'src/styles/components',
+			"componentsSrc"		: "src/styles/components",
 			"dest"         		: "site/css",
 			"lintConfig"     	: "node_modules/scss-styleguide/.scss-lint.yml",
 			"includePaths"   	: ["bower-components"],

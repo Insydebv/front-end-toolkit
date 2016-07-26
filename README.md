@@ -45,50 +45,50 @@ require('front-end-toolkit')(gulp, options);
 
 **Property**|**Default value**|**Description**
 -----|-----|-----
-appRoot            |"site/"|Main dist folder followed by a forward slash
-htdocs             |"d:\\php\\“|Location of Apache htdocs
+**appRoot**|`"site/"`|Main dist folder followed by a forward slash
+**htdocs** |`"d:\\php\\"`|Location of Apache htdocs
  | | 
-bower|`object`|Object with the following options
-assetFileTypes|"png,gif,svg,jpeg,jpg,woff,woff2,eot,ttf,otf"|Comma separated list of filetypes
-scriptFile    |"bower.min.js"|Filename for concatenated bower scripts
-stylesFile    |"\_bower.scss"|Filename for concatenated bower styles
-src           |"bower\_components"|Location of bower components
-assetsDest    |"site/dist"|Where to copy bower assets for distribution
+**bower**|`object`|Object with the following options:
+assetFileTypes|`"png,gif,svg,jpeg,jpg,woff,woff2,eot,ttf,otf"`|Comma separated list of filetypes
+scriptFile    |`"bower.min.js"`|Filename for concatenated bower scripts
+stylesFile    |`"\_bower.scss"`|Filename for concatenated bower styles
+src           |`"bower\_components"`|Location of bower components
+assetsDest    |`"site/dist"`|Where to copy bower assets for distribution
+| | 
+**fonts**|`object`|Object with the following options:
+src           |`"src/fonts/**/*"`|Fonts source dir
+dest|`"site/fonts"`|Distribution fonts dir
  | | 
-fonts|`object`|Object with the following options
-src           |"src/fonts/**/*"|Fonts source dir
-dest|"site/fonts"|Distribution fonts dir
+**images**|`object`|Object with the following options:
+src           |`"src/images/**"`|Images source dir
+dest|`"site/images"`|Distribution images dir
  | | 
-images|`object`|Object with the following options
-src           |"src/images/**"|Images source dir
-dest|"site/images"|Distribution images dir
+**scripts**|`object`|Object with the following options:
+bodyScriptSrc|`["src/script/*.js"]`|Bodyscript source
+headScriptSrc|`["src/script/head/**/*.js"]`|Headscript source
+pageScriptSrc|`["src/script/page/**/*.js"]`|Pagescript source
+dest|`"site/script"`|Distribution script dir
+headScriptFile|`"headscripts.min.js"`|Headscripts are concatenated into this file
+bodyScriptFile|`"script.min.js"`|Bodyscripts are concatenated into this file
  | | 
-scripts|`object`|Object with the following options
-"bodyScriptSrc"|["src/script/*.js"]|Bodyscript source
-“headScriptSrc"|["src/script/head/**/*.js"]|Headscript source
-"pageScriptSrc"|["src/script/page/**/*.js"]|Pagescript source
-“dest”|"site/script"|Distribution script dir
-“headScriptFile”|"headscripts.min.js"|Headscripts are concatenated into this file
-“bodyScriptFile”|"script.min.js"|Bodyscripts are concatenated into this file
+**styles**|`object`|Object with the following options:
+src|`["src/styles/styles.scss"]`|Stylesheets that are parsed
+srcFolder        |`"src/styles"`|Stylesheets source folder
+componentsSrc|`"src/styles/components"`|Location of styles components
+dest         |`"site/css"`|Distribution css dir
+lintConfig     |`"node\_modules/scss-styleguide/.scss-lint.yml"`|Scss-lint config
+includePaths   |`["bower-components"]`|Sass includepaths
+outputStyle    |`"compressed"`|Sass outputstyle
  | | 
-styles|`object`|Object with the following options
-src|["src/styles/styles.scss"]|Stylesheets that are parsed
-srcFolder        |"src/styles"|Stylesheets source folder
-componentsSrc|'src/styles/components'|Location of styles components
-dest         |"site/css"|Distribution css dir
-lintConfig     |"node\_modules/scss-styleguide/.scss-lint.yml"|Scss-lint config
-includePaths   |["bower-components"]|Sass includepaths
-outputStyle    |"compressed"|Sass outputstyle
- | | 
-sprite|`object`|Object with the following options
-src|"src/images/sprite"|Sprite source folder
-dest|"site/images/sprite.png"|Non retina sprite image location
-retinaDest|"site/images/sprite@2x.png"|Retina sprite image location
-scssDest|"../src/styles/\_sprite.scss"|Sprite SCSS source destination (include in styles.scss)
-imgPath|"../images/sprite.png"|Non retina sprite image path for CSS
-retinaImgPath|"../images/sprite@2x.png"|Retina sprite image path for CSS
-retinaSrcFilter|"**/*@2x.png"|Retina SRC filter
-retinaSuffix |"@2x"|Retina files suffix
+**sprite**|`object`|Object with the following options:
+src|`"src/images/sprite"`|Sprite source folder
+dest|`"site/images/sprite.png"`|Non retina sprite image location
+retinaDest|`"site/images/sprite@2x.png"`|Retina sprite image location
+scssDest|`"../src/styles/\_sprite.scss"`|Sprite SCSS source destination (include in styles.scss)
+imgPath|`"../images/sprite.png"`|Non retina sprite image path for CSS
+retinaImgPath|`"../images/sprite@2x.png"`|Retina sprite image path for CSS
+retinaSrcFilter|`"**/*@2x.png"`|Retina SRC filter
+retinaSuffix |`"@2x"`|Retina files suffix
 
 ## Babel
 By default scripts are parsed by `gulp-babel`. 
