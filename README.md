@@ -5,35 +5,90 @@ A scalable modular Gulp based assets pipeline
 `npm install https://github.com/Insydebv/front-end-toolkit.git --save-dev`
 
 ```javascript
-// add to gulpfile.js
-var gulp = require('gulp');
-// pass along gulp reference to have tasks imported
-require('front-end-toolkit')(gulp);
-```
+// Add to your gulpfile.js
 
-run `gulp -T` for a list of available commands
+// Require Gulp
+var gulp = require('gulp');
+
+// Import front-end toolkit tasks
+require('front-end-toolkit')(gulp);
+
+```
 
 ## Features
 * Loads individual tasks from the front-end toolkit for use in your project.
 * Easily integrates into your gulpfile.js without breaking your existing tasks.
 * Each task is stored in it's own local node module to completely separate concerns.
-* Gulp
-* Feature 2
-* Feature 3
-* etc...
+
+
+## Available tasks
+`gulp` The default task. Use this for front-end development. Builds your assets, starts a watcher en live reloads changes in the browser using Browser-Sync.
+
+`gulp build` Use this when building your project. Mostly used by back-end developers and on Jenkins CI.
+
+run `gulp -T` for a list of available commands
 
 ## Options
-Put these in a config object.
+Options are set by passing an options object to the require tasks command.
+```javascript
+// Set options
+var options = {
+	"styles": {
+		"includePaths": ["bower-components/foundation-sites/scss"],
+	}
+};
 
-| Property     | Default Value     | Description
-| ------------ | ----------------- | --------------------------------------------------------
-| path         | `./tasks/`        | Path to directory from which to load your tasks
-| separator    | `:`               | Task name separator, your tasks would be named, e.g. `foo:bar:baz` for `./tasks/foo/bar/baz.js`
-| arguments    | `[]`              | Additional arguments to pass to your task function
-| passGulp     | `true`            | Whether to pass Gulp instance as a first argument to your task function
-| passCallback | `true`            | Whether to pass task callback function as a last argument to your task function
-| gulp         | `require('gulp')` | You could pass your existing Gulp instance if you have one
+// Import front-end toolkit tasks and pass options
+require('front-end-toolkit')(gulp, options);
 
+```
+
+**Property**|**Default value**|**Description**
+-----|-----|-----
+appRoot            |"site/"|Main dist folder followed by a forward slash
+htdocs             |"d:\\php\\“|Location of Apache htdocs
+ | | 
+bower|`object`|Object with the following options
+assetFileTypes|"png,gif,svg,jpeg,jpg,woff,woff2,eot,ttf,otf"|Comma separated list of filetypes
+scriptFile    |"bower.min.js"|Filename for concatenated bower scripts
+stylesFile    |"\_bower.scss"|Filename for concatenated bower styles
+src           |"bower\_components"|Location of bower components
+assetsDest    |"site/dist"|Where to copy bower assets for distribution
+ | | 
+fonts|`object`|Object with the following options
+src           |"src/fonts/**/*"|Fonts source dir
+dest|"site/fonts"|Distribution fonts dir
+ | | 
+images|`object`|Object with the following options
+src           |"src/images/**"|Images source dir
+dest|"site/images"|Distribution images dir
+ | | 
+scripts|`object`|Object with the following options
+"bodyScriptSrc"|["src/script/*.js"]|Bodyscript source
+“headScriptSrc"|["src/script/head/**/*.js"]|Headscript source
+"pageScriptSrc"|["src/script/page/**/*.js"]|Pagescript source
+“dest”|"site/script"|Distribution script dir
+“headScriptFile”|"headscripts.min.js"|Headscripts are concatenated into this file
+“bodyScriptFile”|"script.min.js"|Bodyscripts are concatenated into this file
+ | | 
+styles|`object`|Object with the following options
+src|["src/styles/styles.scss"]|Stylesheets that are parsed
+srcFolder        |"src/styles"|Stylesheets source folder
+componentsSrc|'src/styles/components'|Location of styles components
+dest         |"site/css"|Distribution css dir
+lintConfig     |"node\_modules/scss-styleguide/.scss-lint.yml"|Scss-lint config
+includePaths   |["bower-components"]|Sass includepaths
+outputStyle    |"compressed"|Sass outputstyle
+ | | 
+sprite|`object`|Object with the following options
+src|"src/images/sprite"|Sprite source folder
+dest|"site/images/sprite.png"|Non retina sprite image location
+retinaDest|"site/images/sprite@2x.png"|Retina sprite image location
+scssDest|"../src/styles/\_sprite.scss"|Sprite SCSS source destination (include in styles.scss)
+imgPath|"../images/sprite.png"|Non retina sprite image path for CSS
+retinaImgPath|"../images/sprite@2x.png"|Retina sprite image path for CSS
+retinaSrcFilter|"**/*@2x.png"|Retina SRC filter
+retinaSuffix |"@2x"|Retina files suffix
 
 ## Babel
 By default scripts are parsed by `gulp-babel`. 
