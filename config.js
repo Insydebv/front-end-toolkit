@@ -38,9 +38,8 @@ module.exports = function () {
 		"sprite": {
 			"src"			 	: "src/images/sprite",
 			"dest"		 		: "site/images/sprite.png",
-			"imgName"		 	: "sprite.png",
-			"retinaImgName"		: "sprite@2x.png",
-			"cssName"		 	: "_sprite.scss",
+			"retinaDest"		: "site/images/sprite@2x.png",
+			"scssDest"		 	: "../src/styles/_sprite.scss",
 			"imgPath"		 	: "../images/sprite.png",
 			"retinaImgPath"		: "../images/sprite@2x.png",
 			"retinaSrcFilter"	: "**/*@2x.png",

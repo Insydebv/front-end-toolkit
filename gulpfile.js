@@ -10,6 +10,7 @@ var plugins = require('gulp-load-plugins')({
 		"del",
 		"jshint-stylish",
 		"main-bower-files",
+		"merge-stream",
 		"rework-plugin-url",
 		"sass-index",
 	]
