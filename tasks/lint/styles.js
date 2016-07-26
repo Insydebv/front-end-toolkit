@@ -1,9 +1,9 @@
 // Lint styles
 module.exports = {
-	fn: function (gulp, plugins, options, callback) {
-		return gulp.src(options.paths.stylesSrc)
+	fn: function (gulp, plugins, options) {
+		return gulp.src(options.styles.src)
 			.pipe(plugins.scssLint({
-				'config': options.paths.scssLintConfig
+				'config': options.styles.lintConfig
 			}))
 		;
 	}

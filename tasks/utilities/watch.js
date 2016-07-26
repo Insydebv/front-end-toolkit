@@ -1,16 +1,16 @@
 // Watch for changes
 module.exports = {
-	fn: function (gulp, plugins, options, callback) {
+	fn: function (gulp, plugins, options) {
 
-		gulp.watch(options.paths.bodyScriptSrc, ['scripts:scripts']);
-		gulp.watch(options.paths.headScriptSrc, ['scripts:headscripts']);
-		gulp.watch(options.paths.pageScriptSrc, ['scripts:pagescripts']);
+		gulp.watch(options.scripts.bodyScriptSrc, ['scripts:bodyscripts']);
+		gulp.watch(options.scripts.headScriptSrc, ['scripts:headscripts']);
+		gulp.watch(options.scripts.pageScriptSrc, ['scripts:pagescripts']);
 
-		gulp.watch(options.paths.stylesSrc, ['styles:sass']);
-		gulp.watch(options.paths.stylesComponentsSrc, ['styles']);
+		gulp.watch(options.styles.src, ['styles:sass']);
+		gulp.watch(options.styles.componentsSrc, ['styles']);
 
-		gulp.watch(options.paths.fontSrc, ['fonts:copy']);
-		gulp.watch(options.paths.imgSrc, ['images:imagemin']);
+		gulp.watch(options.fonts.src, ['fonts:build']);
+		gulp.watch(options.images.src, ['images:imagemin']);
 		// gulp.watch('src/images/sprite/**/*', ['sprite']);
 		gulp.watch([
 			'templates/**/*.html',

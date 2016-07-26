@@ -1,10 +1,10 @@
 // Compress images
 module.exports = {
-	fn: function (gulp, plugins, options, callback) {
-		return gulp.src([options.paths.imgSrc, '!src/images/sprite{,/**}'])
-			.pipe(plugins.newer(options.paths.imgDest))
+	fn: function (gulp, plugins, options) {
+		return gulp.src([options.images.src, "!" + sprite.src + "/**.*"])
+			.pipe(plugins.newer(options.images.dest))
 			.pipe(plugins.imagemin())
-			.pipe(gulp.dest(options.paths.imgDest))
+			.pipe(gulp.dest(options.images.dest))
 			.pipe(plugins.browserSync.stream())
 			;
 	}

@@ -1,9 +1,9 @@
 // Copy fonts to dist
 module.exports = {
-	fn: function (gulp, plugins, options, callback) {
-		return gulp.src(options.paths.fontSrc)
-			.pipe(plugins.newer(options.paths.appRoot + options.paths.fontDest))
-			.pipe(gulp.dest(options.paths.appRoot + options.paths.fontDest))
+	fn: function (gulp, plugins, options) {
+		return gulp.src(options.fonts.src)
+			.pipe(plugins.newer(options.fonts.dest))
+			.pipe(gulp.dest(options.fonts.dest))
 			;
 	}
 };

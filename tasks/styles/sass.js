@@ -9,19 +9,19 @@ var onSassError = function (error) {
 // Generate CSS
 module.exports = {
 	dep: ['lint:styles'],
-	fn: function (gulp, plugins, options, callback) {
-		return gulp.src(options.paths.stylesSrc, {base: 'src/styles'})
+	fn: function (gulp, plugins, options) {
+		return gulp.src(options.styles.src, {base: options.styles.srcFolder})
 			.pipe(plugins.plumber({
 				errorHandler: onSassError
 			}))
 			.pipe(plugins.sourcemaps.init())
 			.pipe(plugins.sass({
-				includePaths: options.sassIncludePaths,
-				outputStyle: options.sassOutputStyle,
+				includePaths: options.styles.includePaths,
+				outputStyle: options.styles.outputStyle,
 			}))
 			.pipe(plugins.autoprefixer({browsers: ['last 3 versions']}))
 			.pipe(plugins.sourcemaps.write('./map'))
-			.pipe(gulp.dest(options.paths.appRoot + options.paths.stylesDest))
+			.pipe(gulp.dest(options.styles.dest))
 			.pipe(plugins.browserSync.stream({match: '**/*.css'}))
 			;
 	}

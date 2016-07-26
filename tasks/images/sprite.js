@@ -1,25 +1,25 @@
-// TODO: fix
-//  // Generate sprite
-//  gulp.task('sprite', ['generate-small-sprite-images'], function () {
-//  var spriteData = gulp.src('./src/images/sprite/**/*.png')
-// 	.pipe(plugins.newer('./site/images/sprite.png'))
-// 	.pipe(plugins.spritesmith({
-// 		imgName: 'sprite.png',
-// 		retinaImgName: 'sprite@2x.png',
-// 		cssName: 'sprite.scss',
-// 		imgPath: '../images/sprite.png',
-// 		retinaImgPath : '../images/sprite@2x.png',
-// 		retinaSrcFilter: '**/*@2x.png'
-// 	}));
-// // Pipe image stream through image optimizer and onto disk
-// var imgStream = spriteData.img
-// 	.pipe(plugins.imagemin())
-// 	.pipe(gulp.dest(imgDest));
-//
-// // Pipe CSS stream through CSS optimizer and onto disk
-// var cssStream = spriteData.css
-// 	.pipe(gulp.dest('./src/styles/'));
-//
-// // Return a merged stream to handle both `end` events
-// return mergeStream(imgStream, cssStream);
-// });
+// Generate sprite
+module.exports = {
+	dep: ['images:generate-small-sprite-images'],
+	fn: function (gulp, plugins, options) {
+		var spriteData = gulp.src(options.sprite.src)
+			.pipe(plugins.newer(options.sprite.dest))
+			.pipe(plugins.spritesmith({
+				imgName: options.sprite.imgName,
+				retinaImgName: options.sprite.retinaImgName,
+				cssName: options.sprite.cssName,
+				imgPath: options.sprite.imgPath,
+				retinaImgPath: options.sprite.retinaImgPath,
+				retinaSrcFilter: options.sprite.retinaSrcFilter
+			}));
+
+		// Pipe image stream through image optimizer and onto disk
+		var imgStream = spriteData.img.pipe(plugins.imagemin()).pipe(gulp.dest(options.images.dest));
+
+		// Pipe CSS stream through CSS optimizer and onto disk
+		var cssStream = spriteData.css.pipe(gulp.dest(options.styles.srcFolder));
+
+		// Return a merged stream to handle both `end` events
+		return plugins.mergeStream(imgStream, cssStream);
+	}
+};
