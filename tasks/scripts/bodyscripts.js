@@ -1,7 +1,7 @@
 // Concatenate and minify scripts
 module.exports = {
 	fn: function (gulp, plugins, options, callback) {
-		return gulp.src(options.paths.scriptSrc)
+		return gulp.src(options.paths.bodyScriptSrc)
 			.pipe(plugins.jshint())
 			.pipe(plugins.jshint.reporter(plugins.jshintStylish))
 			.pipe(plugins.sourcemaps.init())

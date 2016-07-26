@@ -14,10 +14,13 @@ require('front-end-toolkit')(gulp);
 run `gulp -T` for a list of available commands
 
 ## Features
-- Gulp
-- Feature 2
-- Feature 3
-- etc...
+* Loads individual tasks from the front-end toolkit for use in your project.
+* Easily integrates into your gulpfile.js without breaking your existing tasks.
+* Each task is stored in it's own local node module to completely separate concerns.
+* Gulp
+* Feature 2
+* Feature 3
+* etc...
 
 ## Options
 Put these in a config object.

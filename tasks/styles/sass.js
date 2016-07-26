@@ -17,7 +17,7 @@ module.exports = {
 			.pipe(plugins.sourcemaps.init())
 			.pipe(plugins.sass({
 				includePaths: options.sassIncludePaths,
-				outputStyle: 'compressed'
+				outputStyle: options.sassOutputStyle,
 			}))
 			.pipe(plugins.autoprefixer({browsers: ['last 3 versions']}))
 			.pipe(plugins.sourcemaps.write('./map'))
