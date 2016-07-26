@@ -1,7 +1,10 @@
+var util = require('gulp-util');
+var beep = require('beepbeep');
+
 // Throw a nice error with a sound effect
 var onSassError = function (error) {
-	plugins.util.log('Sass Error', plugins.util.colors.red('123'));
-	plugins.beepbeep();
+	util.log('Sass Error', util.colors.red('123'));
+	beep();
 	console.log(error);
 	this.emit('end');
 }
