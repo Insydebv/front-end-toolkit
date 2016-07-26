@@ -1,6 +1,5 @@
 module.exports = function () {
 	return {
-		// Global
 		"appRoot"            	: "site/",
 		"htdocs"             	: "d:\\php\\",
 		"bower": {
@@ -27,12 +26,12 @@ module.exports = function () {
 			"bodyScriptFile"    : "script.min.js",
 		},
 		"styles": {
-			"src"          		: "src/styles/styles.scss",
+			"src"          		: ["src/styles/styles.scss"],
 			"srcFolder"        	: "src/styles",
-			"componentsSrc"		: 'src/styles/components/',
+			"componentsSrc"		: 'src/styles/components',
 			"dest"         		: "site/css",
 			"lintConfig"     	: "node_modules/scss-styleguide/.scss-lint.yml",
-			"includePaths"   	: [],
+			"includePaths"   	: ["bower-components"],
 			"outputStyle"    	: "compressed",
 		},
 		"sprite": {
@@ -44,7 +43,6 @@ module.exports = function () {
 			"retinaImgPath"		: "../images/sprite@2x.png",
 			"retinaSrcFilter"	: "**/*@2x.png",
 			"retinaSuffix" 		: "@2x",
-		},
-	};
+		}
+	}
 }
-

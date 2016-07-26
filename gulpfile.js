@@ -16,11 +16,12 @@ var plugins = require('gulp-load-plugins')({
 	]
 });
 
-// Deep assign options
-var options = plugins.deepAssign(require('./config.js')(), options);
+module.exports = function (gulp, options) {
 
-// Load tasks
-module.exports = function (gulp) {
+	// Assign options
+	var options = plugins.deepAssign(require('./config.js')(), options);
+
+	// Load tasks
 	plugins.requireTasks({
 		path: __dirname + '/tasks',
 		arguments: [plugins, options],
