@@ -2,6 +2,6 @@
 var gulpSequence = require('gulp-sequence');
 module.exports = {
 	nativeTask: function (gulp) {
-		gulpSequence(['clean:all', 'bower:build', 'styles:build'], 'fonts:build', 'imagemin', 'scripts:build', gulp)
+		gulpSequence(['clean:all', 'bower:build', 'styles:build'], 'fonts:build', 'images:imagemin', 'scripts:build', gulp)
 	}
 };
