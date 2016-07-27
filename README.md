@@ -71,7 +71,7 @@ src|`["src/styles/styles.scss"]`|Stylesheets that are parsed
 srcFolder        |`"src/styles"`|Stylesheets source folder
 componentsSrc|`"src/styles/components"`|Location of styles components
 dest         |`"site/css"`|Distribution css dir
-lintConfig     |`"node_modules/scss-styleguide/.scss-lint.yml"`|Scss-lint config
+lintConfig     |`"node_modules/scss-styleguide/.sass-lint.yml"`|Sass-lint config
 includePaths   |`["bower_components"]`|Sass includepaths
 outputStyle    |`"compressed"`|Sass outputstyle
 **sprite**|`object`|
