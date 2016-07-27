@@ -34,7 +34,7 @@ Options are set by passing an options object to the require tasks command.
 // Set options
 var options = {
 	"styles": {
-		"includePaths": ["bower-components/foundation-sites/scss"],
+		"includePaths": ["bower_components/foundation-sites/scss"],
 	}
 };
 
@@ -72,7 +72,7 @@ srcFolder        |`"src/styles"`|Stylesheets source folder
 componentsSrc|`"src/styles/components"`|Location of styles components
 dest         |`"site/css"`|Distribution css dir
 lintConfig     |`"node_modules/scss-styleguide/.scss-lint.yml"`|Scss-lint config
-includePaths   |`["bower-components"]`|Sass includepaths
+includePaths   |`["bower_components"]`|Sass includepaths
 outputStyle    |`"compressed"`|Sass outputstyle
 **sprite**|`object`|
 src|`"src/images/sprite"`|Sprite source folder

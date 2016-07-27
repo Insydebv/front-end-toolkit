@@ -31,7 +31,7 @@ module.exports = function () {
 			"componentsSrc"		: "src/styles/components",
 			"dest"         		: "site/css",
 			"lintConfig"     	: "node_modules/scss-styleguide/.scss-lint.yml",
-			"includePaths"   	: ["bower-components"],
+			"includePaths"   	: ["bower_components"],
 			"outputStyle"    	: "compressed",
 		},
 		"sprite": {
