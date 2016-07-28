@@ -72,6 +72,7 @@ srcFolder        |`"src/styles"`|Stylesheets source folder
 componentsSrc|`"src/styles/components"`|Location of styles components
 dest         |`"site/css"`|Distribution css dir
 lintConfig     |`"node_modules/scss-styleguide/.sass-lint.yml"`|Sass-lint config
+lintIgnore|`[]`|Glob with files to be ignored by sass-lint
 includePaths   |`["bower_components"]`|Sass includepaths
 outputStyle    |`"compressed"`|Sass outputstyle
 **sprite**|`object`|
