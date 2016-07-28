@@ -26,7 +26,9 @@ require('front-end-toolkit')(gulp);
 
 `gulp build` Use this when building your project. Mostly used by back-end developers and on Jenkins CI.
 
-run `gulp -T` for a list of available commands
+`gulp test` Use this to run both the styles and script linter.
+
+run `gulp -T` for a list of all available tasks
 
 ## Options
 Options are set by passing an options object to the require tasks command.
