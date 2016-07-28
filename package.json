@@ -43,10 +43,7 @@
     "slash": "^1.0.0"
   },
   "devDependencies": {},
-  "scripts": {
-    "postinstall": "node scripts/install.js",
-    "uninstall": "node scripts/uninstall.js"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Insydebv/front-end-toolkit.git"
