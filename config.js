@@ -31,7 +31,7 @@ module.exports = function () {
 			"componentsSrc"		: "src/styles/components",
 			"dest"         		: "site/css",
 			"lintConfig"     	: "node_modules/scss-styleguide/.sass-lint.yml",
-			"lintIgnore"		: [],
+			"lintIgnore"		: ["src/styles/_bower.scss"],
 			"includePaths"   	: ["bower_components"],
 			"outputStyle"    	: "compressed",
 		},

@@ -6,11 +6,10 @@ module.exports = {
 		gulp.watch(options.scripts.headScriptSrc, ['scripts:headscripts']);
 		gulp.watch(options.scripts.pageScriptSrc, ['scripts:pagescripts']);
 
-		gulp.watch(options.styles.src, ['styles:sass']);
-		gulp.watch(options.styles.componentsSrc, ['styles']);
+		gulp.watch(options.styles.srcFolder + '/**/*.scss', ['styles:sass']);
 
 		gulp.watch(options.fonts.src, ['fonts:build']);
-		gulp.watch(options.images.src, ['images:imagemin']);
+		gulp.watch(options.images.src + '/**/*.scss', ['images:imagemin']);
 		// gulp.watch('src/images/sprite/**/*', ['sprite']);
 		gulp.watch([
 			'templates/**/*.html',

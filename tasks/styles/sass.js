@@ -1,21 +1,10 @@
-var util = require('gulp-util');
-var beep = require('beepbeep');
-
-// Throw a nice error with a sound effect
-var onSassError = function (error) {
-	util.log('Sass Error', util.colors.red('123'));
-	beep();
-	console.log(error);
-	this.emit('end');
-}
-
 // Generate CSS
 module.exports = {
 	dep: ['lint:styles'],
-	fn: function (gulp, plugins, options) {
+	fn: function (gulp, plugins, options, onError) {
 		return gulp.src(options.styles.src, {base: options.styles.srcFolder})
 			.pipe(plugins.plumber({
-				errorHandler: onSassError
+				errorHandler: onError
 			}))
 			.pipe(plugins.sourcemaps.init())
 			.pipe(plugins.sass({

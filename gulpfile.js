@@ -17,6 +17,19 @@ var plugins = require('gulp-load-plugins')({
 });
 
 module.exports = function (gulp, options) {
+	// Handle errors
+	var onError = function(err){
+		plugins.util.log(plugins.util.colors.bgRed('Error') + ' ' + plugins.util.colors.bgMagenta(err.plugin) + ': ' + err.message);
+		if(plugins.util.env.type ==  'production') {
+			// If run with 'gulp build --type production' exit with status code 1
+			process.exit(1);
+		}
+		else {
+			// Else do soft error
+			plugins.beepbeep();
+			this.emit('end');
+		}
+	}
 
 	// Assign options
 	var options = plugins.deepAssign(require('./config.js')(), options);
@@ -24,6 +37,6 @@ module.exports = function (gulp, options) {
 	// Load tasks
 	plugins.requireTasks({
 		path: __dirname + '/tasks',
-		arguments: [plugins, options],
+		arguments: [plugins, options, onError],
 	});
 };
