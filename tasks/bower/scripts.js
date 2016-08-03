@@ -2,6 +2,9 @@
 module.exports = {
 	fn: function (gulp, plugins, options) {
 		return gulp.src(plugins.mainBowerFiles('**/*.js'), {base: options.bower.src})
+			.pipe(plugins.plumber({
+				errorHandler: onError
+			}))
 			.pipe(plugins.sourcemaps.init())
 			.pipe(plugins.babel())
 			.pipe(plugins.concat(options.bower.scriptFile))
