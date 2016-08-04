@@ -1,6 +1,6 @@
 // Concat and minify main Bower scripts
 module.exports = {
-	fn: function (gulp, plugins, options) {
+	fn: function (gulp, plugins, options, onError) {
 		return gulp.src(plugins.mainBowerFiles('**/*.js'), {base: options.bower.src})
 			.pipe(plugins.plumber({
 				errorHandler: onError
