@@ -1,6 +1,6 @@
 // Generate CSS
 module.exports = {
-	dep: ['lint:styles'],
+	dep: ['styles:sass-index'],
 	fn: function (gulp, plugins, options, onError) {
 		return gulp.src(options.styles.src, {base: options.styles.srcFolder})
 			.pipe(plugins.plumber({
