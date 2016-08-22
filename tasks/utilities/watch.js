@@ -1,7 +1,6 @@
-// Watch for changes
+// // Watch for changes
 module.exports = {
-	fn: function (gulp, plugins, options) {
-
+	fn: function (gulp, plugins, options, callback) {
 		gulp.watch(options.scripts.bodyScriptSrc, ['scripts:bodyscripts']);
 		gulp.watch(options.scripts.headScriptSrc, ['scripts:headscripts']);
 		gulp.watch(options.scripts.pageScriptSrc, ['scripts:pagescripts']);
