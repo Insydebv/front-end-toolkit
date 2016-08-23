@@ -1,6 +1,6 @@
 // Concatenate and minify headscripts: scripts that need to be loaded in the <head> section of a page
-module.exports = {
-	fn: function (gulp, plugins, options, onError) {
+module.exports = function (gulp, plugins, options, onError) {
+	gulp.task('scripts:headscripts', function () {
 		return gulp.src(options.scripts.headScriptSrc)
 			.pipe(plugins.plumber({
 				errorHandler: onError
@@ -15,5 +15,5 @@ module.exports = {
 			.pipe(plugins.sourcemaps.write('maps'))
 			.pipe(gulp.dest(options.scripts.dest))
 			;
-	}
+	});
 };

@@ -1,4 +1,4 @@
 // Run all tests
-module.exports = {
-	dep: ['lint:scripts', 'lint:styles']
+module.exports = function (gulp) {
+	gulp.task('test', gulp.parallel('lint:scripts', 'lint:styles'));
 };

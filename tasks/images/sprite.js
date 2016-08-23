@@ -2,9 +2,9 @@
 var spritesmith = require('gulp.spritesmith');
 var mergeStream = require('merge-stream');
 
-module.exports = {
-	dep: ['images:generate-small-sprite-images'],
-	fn: function (gulp, plugins, options) {
+module.exports = function (gulp, plugins, options) {
+	gulp.task('images:sprite', gulp.series('images:generate-small-sprite-images', function () {
+
 		var spriteData = gulp.src(options.sprite.src + "**/*.png")
 			.pipe(plugins.newer(options.sprite.dest))
 			.pipe(spritesmith({
@@ -26,5 +26,5 @@ module.exports = {
 
 		// Return a merged stream to handle both `end` events
 		return mergeStream(imgStream, cssStream);*/
-	}
+	}));
 };

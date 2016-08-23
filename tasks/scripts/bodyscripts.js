@@ -1,6 +1,6 @@
-// Concatenate and minify scripts
-module.exports = {
-	fn: function (gulp, plugins, options, onError) {
+// Concatenate and minify body scripts
+module.exports = function (gulp, plugins, options, onError) {
+	gulp.task('scripts:bodyscripts', function () {
 		return gulp.src(options.scripts.bodyScriptSrc)
 			.pipe(plugins.plumber({
 				errorHandler: onError
@@ -15,5 +15,5 @@ module.exports = {
 			.pipe(plugins.sourcemaps.write('maps'))
 			.pipe(gulp.dest(options.scripts.dest))
 			;
-	}
+	});
 };

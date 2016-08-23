@@ -1,6 +1,6 @@
 // Browser-sync
-module.exports = {
-	fn: function (gulp, plugins, options) {
+module.exports = function (gulp, plugins, options) {
+	gulp.task('utilities:browser-sync', function () {
 		var projectPath = __dirname.toLowerCase().replace(options.htdocs, "");
 		projectPath = projectPath.replace("node_modules\\front-end-toolkit\\tasks\\utilities", "");
 		projectPath = projectPath.replace("\\", "/");
@@ -9,5 +9,5 @@ module.exports = {
 			open: "external",
 			proxy: "localhost/" + projectPath + "site"
 		});
-	}
+	});
 };

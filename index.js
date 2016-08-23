@@ -18,10 +18,10 @@ module.exports = function (gulp, plugins, options, onError) {
 	});
 
 	// Handle errors
-	var onError = function(err){
-		if(err) {
+	var onError = function (err) {
+		if (err) {
 			plugins.util.log(plugins.util.colors.bgRed('Error') + ' ' + plugins.util.colors.bgMagenta(err.plugin) + ': ' + err.message);
-			if(plugins.util.env.type ==  'production') {
+			if (plugins.util.env.type == 'production') {
 				// If run with 'gulp build --type production' exit with status code 1
 				process.exit(1);
 			}
@@ -35,25 +35,58 @@ module.exports = function (gulp, plugins, options, onError) {
 
 	// Assign options
 	var options = plugins.deepAssign(require('./config.js')(), options);
-	
+
 	// Load tasks
-	
+
 	// Bower tasks
 	require('./tasks/bower/assets')(gulp, plugins, options, onError);
 	require('./tasks/bower/scripts')(gulp, plugins, options, onError);
 	require('./tasks/bower/styles')(gulp, plugins, options, onError);
 	require('./tasks/bower/build')(gulp, plugins, options, onError);
-	
+
 	// Clean
+	require('./tasks/clean/bower')(gulp, plugins, options, onError);
+	require('./tasks/clean/fonts')(gulp, plugins, options, onError);
+	require('./tasks/clean/images')(gulp, plugins, options, onError);
+	require('./tasks/clean/scripts')(gulp, plugins, options, onError);
+	require('./tasks/clean/styles')(gulp, plugins, options, onError);
+	require('./tasks/clean/all')(gulp, plugins, options, onError);
+
 	// Fonts
+	require('./tasks/fonts/build')(gulp, plugins, options, onError);
+
 	// Images
+	require('./tasks/images/generate-small-sprite-images')(gulp, plugins, options, onError);
+	require('./tasks/images/imagemin')(gulp, plugins, options, onError);
+	require('./tasks/images/sprite')(gulp, plugins, options, onError);
+
 	// Lint
+	require('./tasks/lint/scripts')(gulp, plugins, options, onError);
+	require('./tasks/lint/styles')(gulp, plugins, options, onError);
+
 	// Scripts
+	require('./tasks/scripts/headscripts')(gulp, plugins, options, onError);
+	require('./tasks/scripts/pagescripts')(gulp, plugins, options, onError);
+	require('./tasks/scripts/bodyscripts')(gulp, plugins, options, onError);
+	require('./tasks/scripts/build')(gulp, plugins, options, onError);
+
 	// Styles
+	require('./tasks/styles/sass-index')(gulp, plugins, options, onError);
+	require('./tasks/styles/sass')(gulp, plugins, options, onError);
+	require('./tasks/styles/build')(gulp, plugins, options, onError);
+
 	// Utilities
-	
+	require('./tasks/utilities/browser-sync')(gulp, plugins, options, onError);
+	require('./tasks/utilities/watch')(gulp, plugins, options, onError);
+
+	// Combined tasks:
 	// Build
+	require('./tasks/build')(gulp, plugins, options, onError);
+
 	// Default
+	require('./tasks/default')(gulp, plugins, options, onError);
+
 	// Test
+	require('./tasks/test')(gulp, plugins, options, onError);
 
 };
