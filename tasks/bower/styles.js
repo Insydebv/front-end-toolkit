@@ -3,18 +3,18 @@ var path = require('path');
 var slash = require('slash');
 var fs = require('fs');
 
-module.exports = {
-	fn: function (gulp, plugins, options) {
+module.exports = function (gulp, plugins, options) {
 
-		var bowerCopyFiles = [];
-		var bowerAssetsDest = options.bower.assetsDest;
+	var bowerCopyFiles = [];
+	var bowerAssetsDest = options.bower.assetsDest;
 
-		if (bowerAssetsDest.substring(0, 1) == '/') {
-			bowerAssetsDest = bowerAssetsDest.substring(1);
-		}
-		// Substract appRoot to get the correct path for the stylesheet
-		bowerAssetsDest = bowerAssetsDest.replace(options.appRoot, "");
+	if (bowerAssetsDest.substring(0, 1) == '/') {
+		bowerAssetsDest = bowerAssetsDest.substring(1);
+	}
+	// Substract appRoot to get the correct path for the stylesheet
+	bowerAssetsDest = bowerAssetsDest.replace(options.appRoot, "");
 
+	gulp.task('bower:styles', function () {
 		return gulp.src(plugins.mainBowerFiles(), {base: options.bower.src})
 			.pipe(plugins.filter([
 				'**/*.css'
@@ -53,5 +53,5 @@ module.exports = {
 			}))
 			.pipe(plugins.concat(options.bower.stylesFile))
 			.pipe(gulp.dest(options.styles.srcFolder));
-	}
+	});
 };

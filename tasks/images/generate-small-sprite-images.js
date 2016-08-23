@@ -4,8 +4,8 @@ var fs			= require('fs');
 var imageResize = require('gulp-image-resize');
 var rename 		= require('gulp-rename');
 
-module.exports = {
-	fn: function (gulp, plugins, options) {
+module.exports = function (gulp, plugins, options) {
+	gulp.task('images:generate-small-sprite-images', function () {
 		return gulp.src(options.sprite.src + "/*" + options.sprite.retinaSuffix + ".png")
 			.pipe(plugins.flatmap(function (stream, file) {
 
@@ -27,5 +27,5 @@ module.exports = {
 					.pipe(gulp.dest(options.sprite.src))
 			}))
 			;
-	}
+	});
 };

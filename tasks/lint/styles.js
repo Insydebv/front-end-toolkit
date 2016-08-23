@@ -1,7 +1,7 @@
 // Lint styles
 var sassLint = require('gulp-sass-lint');
-module.exports = {
-	fn: function (gulp, plugins, options) {
+module.exports = function (gulp, plugins, options) {
+	gulp.task('lint:styles', function () {
 		return gulp.src(options.styles.srcFolder + "/**/*.scss")
 			.pipe(sassLint({
 				configFile: options.styles.lintConfig,
@@ -10,7 +10,6 @@ module.exports = {
 				}
 			}))
 			.pipe(sassLint.format())
-			.pipe(sassLint.failOnError())
-			;
-	}
+			.pipe(sassLint.failOnError());
+	});
 };

@@ -1,7 +1,6 @@
 // Generate CSS
-module.exports = {
-	dep: ['styles:sass-index'],
-	fn: function (gulp, plugins, options, onError) {
+module.exports = function (gulp, plugins, options, onError) {
+	gulp.task('styles:sass', function () {
 		return gulp.src(options.styles.src, {base: options.styles.srcFolder})
 			.pipe(plugins.plumber({
 				errorHandler: onError
@@ -16,5 +15,5 @@ module.exports = {
 			.pipe(gulp.dest(options.styles.dest))
 			.pipe(plugins.browserSync.stream({match: '**/*.css'}))
 			;
-	}
+	});
 };
