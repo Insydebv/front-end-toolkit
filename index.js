@@ -40,7 +40,9 @@ module.exports = function (gulp, plugins, options, onError) {
 	}
 
 	// Assign options
-	var options = plugins.deepAssign(require('./config.js')(), options);
+	var fs = require('fs');
+	var options = JSON.parse(fs.readFileSync(__dirname + '/config.json'));
+	options = plugins.deepAssign(options, options);
 
 	// Load tasks
 
