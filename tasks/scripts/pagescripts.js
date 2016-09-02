@@ -4,6 +4,7 @@ var through = require('through2');
 module.exports = function (gulp, plugins, options, onError) {
 	gulp.task('scripts:pagescripts', function () {
 		return gulp.src(options.scripts.pageScriptSrc)
+			.pipe(plugins.cached('scripts'))
 			.pipe(plugins.plumber({
 				errorHandler: onError
 			}))

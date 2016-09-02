@@ -43,6 +43,7 @@
     "sass-index": "^1.0.1",
     "scss-styleguide": "git+https://github.com/Insydebv/scss-styleguide.git",
     "slash": "^1.0.0",
+    "through2": "^2.0.1",
     "vinyl-buffer": "^1.0.0"
   },
   "devDependencies": {},
