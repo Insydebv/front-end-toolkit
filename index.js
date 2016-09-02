@@ -19,38 +19,46 @@ module.exports = function (gulp, plugins, options, onError) {
 
 	// Handle errors
 	var onError = function (err) {
-		if (err) {
-			plugins.util.log(plugins.util.colors.bgRed('Error') + ' ' + plugins.util.colors.bgMagenta(err.plugin) + ': ' + err.message);
-			if (plugins.util.env.type == 'production') {
-				// If run with 'gulp build --type production' exit with status code 1
-				process.exit(1);
-			}
-			else {
-				// Else do soft error
-				plugins.beepbeep();
-				this.emit('end');
-			}
+		if (plugins.util.env.type != 'production') {
+			plugins.notify({
+				title: 'Task Failed [' + err.plugin + ']',
+				message: 'See console',
+				sound: 'Beep'
+			}).write(err);
+		}
+
+		plugins.util.log(plugins.util.colors.bgRed('Error') + ' ' + plugins.util.colors.bgMagenta(err.plugin) + ': ' + err.message);
+
+		if (plugins.util.env == 'production') {
+			// If run with 'gulp build --type production' exit with status code 1
+			process.exit(1);
+		}
+		else {
+			// Else do soft error
+			this.emit('end');
 		}
 	}
 
 	// Assign options
-	var options = plugins.deepAssign(require('./config.js')(), options);
+	var options = require(__dirname + '/config.json');
+	options = plugins.deepAssign(options, options);
 
 	// Load tasks
 
 	// Bower tasks
-	require('./tasks/bower/assets')(gulp, plugins, options, onError);
+	require('./tasks/bower/assets')(gulp, plugins, options);
 	require('./tasks/bower/scripts')(gulp, plugins, options, onError);
 	require('./tasks/bower/styles')(gulp, plugins, options, onError);
-	require('./tasks/bower/build')(gulp, plugins, options, onError);
+	require('./tasks/bower/build')(gulp);
 
 	// Clean
-	require('./tasks/clean/bower')(gulp, plugins, options, onError);
-	require('./tasks/clean/fonts')(gulp, plugins, options, onError);
-	require('./tasks/clean/images')(gulp, plugins, options, onError);
-	require('./tasks/clean/scripts')(gulp, plugins, options, onError);
-	require('./tasks/clean/styles')(gulp, plugins, options, onError);
-	require('./tasks/clean/all')(gulp, plugins, options, onError);
+	require('./tasks/clean/bower')(gulp, plugins, options);
+	require('./tasks/clean/fonts')(gulp, plugins, options);
+	require('./tasks/clean/images')(gulp, plugins, options);
+	require('./tasks/clean/scripts')(gulp, plugins, options);
+	require('./tasks/clean/styles')(gulp, plugins, options);
+	require('./tasks/clean/styles')(gulp, plugins, options);
+	require('./tasks/clean/all')(gulp);
 
 	// Fonts
 	require('./tasks/fonts/build')(gulp, plugins, options, onError);
