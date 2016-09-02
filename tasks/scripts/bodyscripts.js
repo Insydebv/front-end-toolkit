@@ -1,5 +1,7 @@
 // Concatenate and minify body scripts
-module.exports = function (gulp, plugins, options, onError) {
+var through = require('through2');
+
+module.exports = function (gulp, plugins, options, onError, jsHintErrorReporter) {
 	gulp.task('scripts:bodyscripts', function () {
 		return gulp.src(options.scripts.bodyScriptSrc)
 			.pipe(plugins.plumber({
@@ -8,6 +10,7 @@ module.exports = function (gulp, plugins, options, onError) {
 			.pipe(plugins.filter('**/*.js'))
 			.pipe(plugins.jshint())
 			.pipe(plugins.jshint.reporter(plugins.jshintStylish))
+			.pipe(through.obj(jsHintErrorReporter))
 			.pipe(plugins.sourcemaps.init())
 			.pipe(plugins.concat(options.scripts.bodyScriptFile))
 			.pipe(plugins.babel())

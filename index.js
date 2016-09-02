@@ -19,13 +19,11 @@ module.exports = function (gulp, plugins, options, onError) {
 
 	// Handle errors
 	var onError = function (err) {
-		if (!plugins.util.env.production) {
-			plugins.notify({
-				title: 'Task Failed [' + err.plugin + ']',
-				message: 'See console',
-				sound: 'Beep'
-			}).write(err);
-		}
+		plugins.notify({
+			title: 'Task Failed [' + err.plugin + ']',
+			message: 'See console',
+			sound: 'Beep'
+		}).write(err);
 
 		plugins.util.log(plugins.util.colors.bgRed('Error') + ' ' + plugins.util.colors.bgMagenta(err.plugin) + ': ' + err.message);
 
@@ -37,7 +35,34 @@ module.exports = function (gulp, plugins, options, onError) {
 			// If run with 'gulp build --production' exit with status code 1 so the build fails
 			process.exit(1);
 		}
-	}
+	};
+
+	var jsHintErrorReporter = function (file, enc, callback) {
+		if (file.jshint.success) {
+			// Don't show something if success
+			callback();
+		}
+
+		// Count errors
+		var errorCount = 0;
+		var codes = { W: 0, E: 0 };
+		(file.jshint.results||[]).forEach(function(result) {
+			codes[result.error.code[0]]++;
+		});
+
+		if (!codes['E'] && codes['W']) {
+			// Only warnings, so don't show a notification
+			callback();
+		}
+		else if (codes['E'] > 0) {
+			// There is a true error, so notify!
+			var err = new plugins.util.PluginError('gulp-jshint', {
+				message: 'See console',
+			});
+			this.emit("error", err);
+			callback();
+		}
+	};
 
 	// Assign options
 	var options = require(__dirname + '/config.json');
@@ -73,9 +98,9 @@ module.exports = function (gulp, plugins, options, onError) {
 	require('./tasks/lint/styles')(gulp, plugins, options, onError);
 
 	// Scripts
-	require('./tasks/scripts/headscripts')(gulp, plugins, options, onError);
-	require('./tasks/scripts/pagescripts')(gulp, plugins, options, onError);
-	require('./tasks/scripts/bodyscripts')(gulp, plugins, options, onError);
+	require('./tasks/scripts/headscripts')(gulp, plugins, options, onError, jsHintErrorReporter);
+	require('./tasks/scripts/pagescripts')(gulp, plugins, options, onError, jsHintErrorReporter);
+	require('./tasks/scripts/bodyscripts')(gulp, plugins, options, onError, jsHintErrorReporter);
 	require('./tasks/scripts/build')(gulp, plugins, options, onError);
 
 	// Styles
