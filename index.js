@@ -19,7 +19,7 @@ module.exports = function (gulp, plugins, options, onError) {
 
 	// Handle errors
 	var onError = function (err) {
-		if (plugins.util.env.type != 'production') {
+		if (!plugins.util.env.production) {
 			plugins.notify({
 				title: 'Task Failed [' + err.plugin + ']',
 				message: 'See console',
@@ -29,13 +29,13 @@ module.exports = function (gulp, plugins, options, onError) {
 
 		plugins.util.log(plugins.util.colors.bgRed('Error') + ' ' + plugins.util.colors.bgMagenta(err.plugin) + ': ' + err.message);
 
-		if (plugins.util.env == 'production') {
-			// If run with 'gulp build --type production' exit with status code 1
-			process.exit(1);
+		if (!plugins.util.env.production) {
+			// Do soft error to keep streams going
+			this.emit('end');
 		}
 		else {
-			// Else do soft error
-			this.emit('end');
+			// If run with 'gulp build --production' exit with status code 1 so the build fails
+			process.exit(1);
 		}
 	}
 
@@ -56,7 +56,7 @@ module.exports = function (gulp, plugins, options, onError) {
 	require('./tasks/clean/fonts')(gulp, plugins, options);
 	require('./tasks/clean/images')(gulp, plugins, options);
 	require('./tasks/clean/scripts')(gulp, plugins, options);
-	require('./tasks/clean/styles')(gulp, plugins, options);
+	require('./tasks/clean/sprite')(gulp, plugins, options);
 	require('./tasks/clean/styles')(gulp, plugins, options);
 	require('./tasks/clean/all')(gulp);
 

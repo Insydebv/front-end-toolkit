@@ -10,7 +10,6 @@ module.exports = function (gulp, plugins, options, onError) {
 					ignore: options.styles.lintIgnore
 				}
 			}))
-			.pipe(sassLint.format())
-			.pipe(sassLint.failOnError());
+			.pipe(sassLint.format());
 	});
 };
