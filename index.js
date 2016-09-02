@@ -29,7 +29,7 @@ module.exports = function (gulp, plugins, options, onError) {
 
 		plugins.util.log(plugins.util.colors.bgRed('Error') + ' ' + plugins.util.colors.bgMagenta(err.plugin) + ': ' + err.message);
 
-		if (plugins.util.env.type == 'production') {
+		if (plugins.util.env == 'production') {
 			// If run with 'gulp build --type production' exit with status code 1
 			process.exit(1);
 		}
@@ -40,8 +40,7 @@ module.exports = function (gulp, plugins, options, onError) {
 	}
 
 	// Assign options
-	var fs = require('fs');
-	var options = JSON.parse(fs.readFileSync(__dirname + '/config.json'));
+	var options = require(__dirname + '/config.json');
 	options = plugins.deepAssign(options, options);
 
 	// Load tasks
@@ -57,6 +56,7 @@ module.exports = function (gulp, plugins, options, onError) {
 	require('./tasks/clean/fonts')(gulp, plugins, options);
 	require('./tasks/clean/images')(gulp, plugins, options);
 	require('./tasks/clean/scripts')(gulp, plugins, options);
+	require('./tasks/clean/styles')(gulp, plugins, options);
 	require('./tasks/clean/styles')(gulp, plugins, options);
 	require('./tasks/clean/all')(gulp);
 

@@ -6,7 +6,8 @@
     "scriptFile"    	: "bower.min.js",
     "stylesFile"    	: "_bower.scss",
     "src"           	: "bower_components",
-    "assetsDest"    	: "site/dist"
+    "assetsDest"    	: "site/dist",
+    "config"            : "bower.json"
   },
   "fonts": {
     "src"            	: "src/fonts/**/*",

@@ -8,7 +8,7 @@ module.exports = function (gulp, plugins, options, onError) {
 			.pipe(plugins.sourcemaps.init())
 			.pipe(plugins.sass({
 				includePaths: options.styles.includePaths,
-				outputStyle: options.styles.outputStyle,
+				outputStyle: (!plugins.util.env.production ? "expanded" : "compressed"),
 			}))
 			.pipe(plugins.autoprefixer({browsers: ['last 3 versions']}))
 			.pipe(plugins.sourcemaps.write('./map'))
