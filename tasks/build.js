@@ -1,7 +1,4 @@
 // Build everything
-var gulpSequence = require('gulp-sequence');
-module.exports = {
-	nativeTask: function (gulp) {
-		gulpSequence(['clean:all', 'bower:build', 'styles:build', 'fonts:build', 'images:imagemin', 'scripts:build'], gulp);
-	}
+module.exports = function (gulp) {
+	gulp.task('build', gulp.series('clean:all', gulp.parallel(gulp.series('bower:build', 'images:sprite', 'styles:build'), 'fonts:build', 'images:imagemin', 'scripts:build')));
 };
