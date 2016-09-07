@@ -17,11 +17,7 @@ module.exports = function (gulp, plugins, options) {
 		gulp.watch(options.bower.config, gulp.parallel('bower:assets', 'bower:scripts', gulp.series('bower:styles', 'styles:sass')));
 		gulp.watch([options.images.src, '!' + options.sprite.srcFolder + '{,/**}'], gulp.series('images:imagemin'));
 		gulp.watch(options.sprite.srcFolder + '/*' + options.sprite.retinaSuffix + '.png', gulp.series('images:sprite', 'styles:sass'));
-		gulp.watch([
-			'templates/**/*.html',
-			'site/protected/views/**/*.php',
-			'site/protected/widgets/**/*.php',
-		], gulp.series(reloadBrowser));
+		gulp.watch(options.utilities.watchSrc, gulp.series(reloadBrowser));
 		done();
 	});
 };

@@ -1,6 +1,5 @@
 {
   "appRoot"            	: "site/",
-  "htdocs"             	: "d:\\php\\",
   "bower": {
     "assetFileTypes"	: "png,gif,svg,jpeg,jpg,woff,woff2,eot,ttf,otf",
     "scriptFile"    	: "bower.min.js",
@@ -44,5 +43,10 @@
     "retinaImgPath"		: "../images/sprite@2x.png",
     "retinaSrcFilter"	: "src/images/sprite/*@2x.png",
     "retinaSuffix" 		: "@2x"
+  },
+  "utilities": {
+    "browserSyncHtdocs" : "d:\\php\\",
+    "browserSyncOpen"   : "external",
+    "watchSrc"          : "templates/**/*.html"
   }
 }

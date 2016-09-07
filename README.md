@@ -48,7 +48,6 @@ require('front-end-toolkit')(gulp, options);
 **Property**|**Default value**|**Description**
 -----|-----|-----
 **appRoot**|`"site/"`|Main dist folder followed by a forward slash
-**htdocs** |`"d:\\php\\"`|Location of Apache htdocs
 **bower**|`object`|
 assetFileTypes|`"png,gif,svg,jpeg,jpg,woff,woff2,eot,ttf,otf"`|Comma separated list of filetypes
 scriptFile    |`"bower.min.js"`|Filename for concatenated bower scripts
@@ -87,6 +86,11 @@ imgPath|`"../images/sprite.png"`|Non retina sprite image path for CSS
 retinaImgPath|`"../images/sprite@2x.png"`|Retina sprite image path for CSS
 retinaSrcFilter|`"src/images/sprite/*@2x.png"`|Retina SRC filter
 retinaSuffix |`"@2x"`|Retina files suffix
+**utilities**|`object`|
+browserSyncHtdocs |`"d:\\php\\"`|Location of Apache htdocs for Browser Sync
+browserSyncOpen |`"external"`| Decide which URL to open automatically when Browsersync starts.
+watchSrc |`"templates/**/*.html"`|Glob with additional folders to watch, for example your template files or php views.
+
 
 ## Babel
 By default scripts are parsed by `gulp-babel`. 
