@@ -1,5 +1,5 @@
 # Webdev Toolkit
-A scalable modular Gulp based assets pipeline brought to you by the people at Insyde.
+A scalable modular Gulp based assets pipeline.
 
 ## Usage
 `npm install webdev-toolkit --save-dev`
