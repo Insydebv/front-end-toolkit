@@ -42,7 +42,7 @@
     "path": "^0.12.7",
     "rework-plugin-url": "^1.1.0",
     "sass-index": "^1.0.1",
-    "scss-styleguide": "git+https://github.com/Insydebv/scss-styleguide.git",
+    "webdev-scss-styleguide": "git+https://github.com/Insydebv/webdev-scss-styleguide.git",
     "slash": "^1.0.0",
     "through2": "^2.0.1",
     "vinyl-buffer": "^1.0.0"
@@ -51,12 +51,12 @@
   "scripts": {},
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Insydebv/front-end-toolkit.git"
+    "url": "git+https://github.com/Insydebv/webdev-toolkit.git"
   },
   "author": "Maarten van Spil <maarten@insyde.nl>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Insydebv/front-end-toolkit/issues"
+    "url": "https://github.com/Insydebv/webdev-toolkit/issues"
   },
-  "homepage": "https://github.com/Insydebv/front-end-toolkit#readme"
+  "homepage": "https://github.com/Insydebv/webdev-toolkit#readme"
 }
