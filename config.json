@@ -29,7 +29,7 @@
     "srcFolder"        	: "src/styles",
     "componentsSrc"		: "src/styles/components",
     "dest"         		: "site/css",
-    "lintConfig"     	: "node_modules/scss-styleguide/.sass-lint.yml",
+    "lintConfig"     	: "node_modules/webdev-scss-styleguide/.sass-lint.yml",
     "lintIgnore"		: ["src/styles/_bower.scss", "src/styles/_sprite.scss"],
     "includePaths"   	: ["bower_components"]
   },
