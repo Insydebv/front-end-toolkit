@@ -1,6 +1,6 @@
 {
   "name": "webdev-toolkit",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Toolkit for creating and working with assets for web projects.",
   "main": "index.js",
   "dependencies": {
