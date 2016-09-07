@@ -1,4 +1,4 @@
-module.exports = function (gulp, plugins, options, onError) {
+module.exports = function (gulp, options) {
 
 	// Load plugins
 	var plugins = require('gulp-load-plugins')({
@@ -65,8 +65,8 @@ module.exports = function (gulp, plugins, options, onError) {
 	};
 
 	// Assign options
-	var options = require(__dirname + '/config.json');
-	options = plugins.deepAssign(options, options);
+	var defaultOptions = require(__dirname + '/config.json');
+	options = plugins.deepAssign(defaultOptions, options);
 
 	// Load tasks
 
