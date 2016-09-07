@@ -55,6 +55,7 @@ scriptFile    |`"bower.min.js"`|Filename for concatenated bower scripts
 stylesFile    |`"_bower.scss"`|Filename for concatenated bower styles
 src           |`"bower_components"`|Location of bower components
 assetsDest    |`"site/dist"`|Where to copy bower assets for distribution
+config    |`"bower.json"`|Where your Bower config is located
 **fonts**|`object`|
 src           |`"src/fonts/**/*"`|Fonts source dir
 dest|`"site/fonts"`|Distribution fonts dir
@@ -74,17 +75,17 @@ srcFolder        |`"src/styles"`|Stylesheets source folder
 componentsSrc|`"src/styles/components"`|Location of styles components
 dest         |`"site/css"`|Distribution css dir
 lintConfig     |`"node_modules/scss-styleguide/.sass-lint.yml"`|Sass-lint config
-lintIgnore|`[]`|Glob with files to be ignored by sass-lint
+lintIgnore|`["src/styles/_bower.scss", "src/styles/_sprite.scss"]`|Glob with files to be ignored by sass-lint
 includePaths   |`["bower_components"]`|Sass includepaths
-outputStyle    |`"compressed"`|Sass outputstyle
 **sprite**|`object`|
-src|`"src/images/sprite"`|Sprite source folder
-dest|`"site/images/sprite.png"`|Non retina sprite image location
-retinaDest|`"site/images/sprite@2x.png"`|Retina sprite image location
-scssDest|`"../src/styles/_sprite.scss"`|Sprite SCSS source destination (include in styles.scss)
+src|`"src/images/sprite/*.png"`|Sprite source files
+srcFolder"|`"src/images/sprite"`|Sprite source folder
+imgName|`"sprite.png"`|Non retina sprite image name
+retinaImgName|`"sprite@2x.png"`|Retina sprite image name
+cssName|`"../src/styles/_sprite.scss"`|Sprite SCSS source destination (include in styles.scss)
 imgPath|`"../images/sprite.png"`|Non retina sprite image path for CSS
 retinaImgPath|`"../images/sprite@2x.png"`|Retina sprite image path for CSS
-retinaSrcFilter|`"**/*@2x.png"`|Retina SRC filter
+retinaSrcFilter|`"src/images/sprite/*@2x.png"`|Retina SRC filter
 retinaSuffix |`"@2x"`|Retina files suffix
 
 ## Babel

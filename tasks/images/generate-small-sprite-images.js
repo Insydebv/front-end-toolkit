@@ -28,7 +28,7 @@ module.exports = function (gulp, plugins, options, onError) {
 						// Remove retina suffix
 						path.basename = path.basename.replace(options.sprite.retinaSuffix, "");
 					}))
-					.pipe(gulp.dest('src/images/sprite'))
+					.pipe(gulp.dest(options.sprite.srcFolder))
 			}))
 			;
 	});
