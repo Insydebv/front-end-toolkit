@@ -1,8 +1,8 @@
 {
-  "name": "front-end-toolkit",
+  "name": "webdev-toolkit",
   "version": "1.0.0",
-  "description": "Toolkit for creating and working with assets",
-  "main": "gulpfile.js",
+  "description": "Toolkit for creating and working with assets for web projects.",
+  "main": "index.js",
   "dependencies": {
     "babel-preset-es2015": "^6.9.0",
     "beepbeep": "^1.2.0",
