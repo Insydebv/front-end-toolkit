@@ -17,7 +17,7 @@
     "dest"            	: "site/images"
   },
   "scripts": {
-    "bodyScriptSrc"     : ["src/script/*.js"],
+    "bodyScriptSrc"     : ["src/script/body/**/*.js"],
     "headScriptSrc"     : ["src/script/head/**/*.js"],
     "pageScriptSrc"     : ["src/script/page/**/*.js"],
     "dest"	         	: "site/script",

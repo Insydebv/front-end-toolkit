@@ -25,9 +25,47 @@ This leaves you with time to focus on the things that really matter!
 * Easily integrates into your gulpfile.js without breaking your existing tasks.
 * Each task is stored in it's own local node module to completely separate concerns.
 
+## Project structure
+We suggest using the following default folder layout. You can change it to suit your own structure by setting the correct paths in configuration.
+* bower_components `bower.src`
+* node_modules
+* site `appRoot`
+  - css `styles.dest`
+  - dist `bower.assetsDest`
+    - package-name
+      - file.png
+      - file.woff
+      - etc. `bower.assetFileTypes`
+  - images `images.dest`
+    - file.jpg
+    - sprite.png `sprite.imgName`
+    - sprite@2x.png `sprite.retinaImgName`
+  - script `scripts.dest`
+* src
+  - images `images.scr`
+    - sprite `sprite.srcFolder`
+      - image@2x.png
+  - script
+    - body `scripts.bodyScriptSrc`
+      - file.js
+      - these get concatenated into script.min.js `scripts.bodyScriptFile`
+    - head `scripts.headScriptSrc`
+      - file.js
+      - these get concatenated into headscripts.min.js `scripts.bodyScriptFile`
+    - page `scripts.pageScriptSrc`
+      - file.js
+      - these aren't concatenated
+    - etc. 
+  - styles `styles.srcFolder`
+    - components `styles.componentsSrc`
+    - _sprite.scss `sprite.cssName`
+    - _bower.scss `bower.stylesFile`
+    - styles.scss `styles.src`
+* templates `utilities.watchSrc`
+  - file.html 
 
 ## Available tasks
-`gulp` The default task. Use this for front-end development. Builds your assets, starts a watcher en live reloads changes in the browser using Browser-Sync.
+`gulp` The default task. Use this for front-end development. Builds your assets, starts a watcher and live reloads changes in the browser using Browser-Sync.
 
 `gulp build` Use this when building your project. Mostly used by back-end developers and on Jenkins CI.
 
@@ -35,7 +73,7 @@ This leaves you with time to focus on the things that really matter!
 
 run `gulp -T` for a list of all available tasks
 
-Run tasks with the `--production` handle on your build system. This ensures that hard errors are thrown (so builds fail on erros) and stuff gets minified.
+Run tasks with the `--production` handle on your build system. This ensures that hard errors are thrown (so builds fail on errors) and stuff gets minified.
 For example: `gulp build --production`
 
 ## Options
