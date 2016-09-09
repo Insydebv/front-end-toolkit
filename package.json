@@ -45,7 +45,9 @@
     "webdev-scss-styleguide": "^1.0.0"
   },
   "devDependencies": {},
-  "scripts": {},
+  "scripts": {
+    "install": "node scripts/install.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Insydebv/webdev-toolkit.git"

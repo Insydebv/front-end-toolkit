@@ -1,21 +1,45 @@
 # Webdev Toolkit
-A scalable modular Gulp based assets pipeline.
+A scalable modular Gulp 4 based assets pipeline.
 
-## Usage
-`npm install webdev-toolkit --save-dev`
+## Getting Started
 
-```javascript
+#### 1. Update your Node JS installation
+https://nodejs.org/en/
+
+#### 2. Install gulp globally:
+__If you have previously installed a version of gulp globally, please run `npm rm -g gulp`
+to make sure your old version doesn't collide with gulp-cli.__
+```sh
+$ npm install -g gulp-cli
+```
+
+#### 3. Initialize in your project directory:
+```sh
+$ npm init
+```
+
+#### 4. Install the Webdev Toolkit in your project devDependencies:
+```sh
+$ npm install webdev-toolkit --save-dev
+```
+If you don't have some of the required files, the toolkit will create them for you:
+* `.babelrc`
+* `.jshintignore`
+* `gulpconfig.json`
+* `gulpfile.js`
+
+#### 5. Load the toolkit in your Gulpfile
+```js
 // Add to your gulpfile.js
-
-// Optional json file with configuration
-var options = require('./gulpconfig.json');
 
 // Require Gulp
 var gulp = require('gulp');
 
+// Optional json file with configuration
+var options = require('./gulpconfig.json');
+
 // Import front-end toolkit tasks
 require('webdev-toolkit')(gulp, options);
-
 ```
 
 ## Features
@@ -77,8 +101,10 @@ Run tasks with the `--production` handle on your build system. This ensures that
 For example: `gulp build --production`
 
 ## Options
-You can configure the tool by providing a .json configuration file. Make sure you load the config as seen in the example above.
+You can configure the toolkit by setting options in `gulpconfig.json`
 ```json
+// gulpconfig.json
+
 // Set options
 {
   "appRoot"            	: "site/",
@@ -92,7 +118,7 @@ You can configure the tool by providing a .json configuration file. Make sure yo
   }
 }
 ```
-
+### Available options
 **Property**|**Default value**|**Description**
 -----|-----|-----
 **appRoot**|`"site/"`|Main dist folder followed by a forward slash
