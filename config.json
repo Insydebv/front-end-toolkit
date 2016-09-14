@@ -28,6 +28,7 @@
     "src"          		: ["src/styles/styles.scss"],
     "srcFolder"        	: "src/styles",
     "componentsSrc"		: "src/styles/components",
+    "componentsIgnore"	: "",
     "dest"         		: "site/css",
     "lintConfig"     	: "node_modules/webdev-scss-styleguide/.sass-lint.yml",
     "lintIgnore"		: ["src/styles/_bower.scss", "src/styles/_sprite.scss"],
