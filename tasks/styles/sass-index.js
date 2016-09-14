@@ -2,8 +2,9 @@
 module.exports = function (gulp, plugins, options) {
 	gulp.task('styles:sass-index', function () {
 		return plugins.sassIndex({
+			dir: options.styles.componentsSrc,
 			extensions: ['.scss'],
-			dir: options.styles.componentsSrc
+			ignore: options.styles.componentsIgnore
 		});
 	});
 };
