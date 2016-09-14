@@ -146,7 +146,7 @@ bodyScriptFile|`"script.min.js"`|Bodyscripts are concatenated into this file
 src|`["src/styles/styles.scss"]`|Stylesheets that are parsed
 srcFolder        |`"src/styles"`|Stylesheets source folder
 componentsSrc|`"src/styles/components"`|Location of styles components
-componentsIgnore|`""`|Indexable components to ignore, handy if you dont have any components at all.
+componentsIgnore|`[]`|Indexable components to ignore, handy if you dont have any components at all.
 dest         |`"site/css"`|Distribution css dir
 lintConfig     |`"node_modules/scss-styleguide/.sass-lint.yml"`|Sass-lint config
 lintIgnore|`["src/styles/_bower.scss", "src/styles/_sprite.scss"]`|Glob with files to be ignored by sass-lint
