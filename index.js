@@ -1,130 +1,95 @@
-module.exports = function (gulp, options) {
+'use strict';
+const plugins = require('./libs/plugins');
+// let jsHintErrorReporter = require('./libs/jsHintErrorReporter');
+// let onError = require('./libs/onError');
+//
 
-	// Load plugins
-	var plugins = require('gulp-load-plugins')({
-		pattern: [
-			"gulp-*",
-			"gulp.*",
-			"beepbeep",
-			"browser-sync",
-			"deep-assign",
-			"del",
-			"jshint-stylish",
-			"main-bower-files",
-			"merge-stream",
-			"rework-plugin-url",
-			"sass-index",
-		]
-	});
-
-	// Handle errors
-	var jsHintErrorReporter = function (file, enc, callback) {
-		if (file.jshint) {
-			if (file.jshint.success) {
-				// Don't show something if success
-				callback(null, file);
-			}
-
-			// Count errors
-			var errorCount = 0;
-			var codes = {W: 0, E: 0};
-			(file.jshint.results || []).forEach(function (result) {
-				codes[result.error.code[0]]++;
-			});
-
-			if (!codes['E'] && codes['W']) {
-				// Only warnings, so don't show a notification
-				callback(null, file);
-			}
-			else if (codes['E'] > 0) {
-				// There is a true error, so notify!
-				var err = new plugins.util.PluginError('gulp-jshint', {
-					message: 'See console',
-				});
-				this.emit("error", err);
-				callback(null, file);
-			}
-		}
-		else {
-			callback(null, file);
-		}
-	};
-
-	var onError = function (err) {
-		plugins.notify({
-			title: 'Task Failed [' + err.plugin + ']',
-			message: 'See console',
-			sound: 'Beep'
-		}).write(err);
-
-		plugins.util.log(plugins.util.colors.bgRed('Error') + ' ' + plugins.util.colors.bgMagenta(err.plugin) + ': ' + err.message);
-
-		if (!plugins.util.env.production) {
-			// Do soft error to keep streams going
-			this.emit('end');
-		}
-		else {
-			// If run with 'gulp build --production' exit with status code 1 so the build fails
-			process.exit(1);
-		}
-	};
+module.exports = (gulp, options) => {
+// });
+// module.exports = function (gulp, options) {
 
 	// Assign options
-	var defaultOptions = require(__dirname + '/config.json');
+	const defaultOptions = require(__dirname + '/config.json');
 	options = plugins.deepAssign(defaultOptions, options);
 
-	// Load tasks
+	 // Load tasks
 
-	// Bower tasks
-	require('./tasks/bower/assets')(gulp, plugins, options);
-	require('./tasks/bower/scripts')(gulp, plugins, options, onError);
-	require('./tasks/bower/styles')(gulp, plugins, options, onError);
-	require('./tasks/bower/build')(gulp);
+	 // Bower tasks
+	 const bowerAssets = require('./tasks/bower/assets')(gulp, options);
+	 gulp.task("bower:assets", bowerAssets)
+	 const bowerScripts = require('./tasks/bower/scripts')(gulp, options);
+	 gulp.task("bower:scripts", bowerScripts)
+	 const bowerStyles = require('./tasks/bower/styles')(gulp, options);
+	 gulp.task("bower:styles", bowerStyles)
+	 gulp.task('bower:build', gulp.parallel('bower:assets', 'bower:scripts', 'bower:styles'));
 
-	// Clean
-	require('./tasks/clean/bower')(gulp, plugins, options);
-	require('./tasks/clean/fonts')(gulp, plugins, options);
-	require('./tasks/clean/images')(gulp, plugins, options);
-	require('./tasks/clean/scripts')(gulp, plugins, options);
-	require('./tasks/clean/sprite')(gulp, plugins, options);
-	require('./tasks/clean/styles')(gulp, plugins, options);
-	require('./tasks/clean/all')(gulp);
+	 // Clean
+	 const cleanBower = require('./tasks/clean/bower')(gulp, options);
+	 gulp.task('clean:bower', cleanBower);
+	 const cleanFonts = require('./tasks/clean/fonts')(gulp, options);
+	 gulp.task('clean:fonts', cleanFonts);
+	 const cleanImages = require('./tasks/clean/images')(gulp, options);
+	 gulp.task('clean:images', cleanImages);
+	 const cleanScripts = require('./tasks/clean/scripts')(gulp, options);
+	 gulp.task('clean:scripts', cleanScripts);
+	 const cleanSprite = require('./tasks/clean/sprite')(gulp, options);
+	 gulp.task('clean:sprite', cleanSprite);
+	 const cleanStyles = require('./tasks/clean/styles')(gulp, options);
+	 gulp.task('clean:styles', cleanStyles);
+	 gulp.task('clean:all', gulp.parallel('clean:bower', 'clean:fonts', 'clean:images', 'clean:scripts', 'clean:styles', 'clean:sprite'));
 
-	// Fonts
-	require('./tasks/fonts/build')(gulp, plugins, options, onError);
+	 // Fonts
+	 const fontsBuild = require('./tasks/fonts/build')(gulp, options);
+	 gulp.task('fonts:build', fontsBuild);
 
-	// Images
-	require('./tasks/images/generate-small-sprite-images')(gulp, plugins, options, onError);
-	require('./tasks/images/imagemin')(gulp, plugins, options, onError);
-	require('./tasks/images/sprite')(gulp, plugins, options, onError);
+	 // Images
+	 const imagesGenerateSmallSpriteImages = require('./tasks/images/generate-small-sprite-images')(gulp, options);
+	 gulp.task('images:generate-small-sprite-images', imagesGenerateSmallSpriteImages);
+	 const imagesImagemin = require('./tasks/images/imagemin')(gulp, options);
+	 gulp.task('images:imagemin', imagesImagemin);
+	 const imagesSprite = require('./tasks/images/sprite')(gulp, options);
+	 gulp.task('images:sprite', imagesSprite);
 
-	// Lint
-	require('./tasks/lint/scripts')(gulp, plugins, options, onError, jsHintErrorReporter);
-	require('./tasks/lint/styles')(gulp, plugins, options, onError);
+	 // Lint
+	 const lintScripts = require('./tasks/lint/scripts')(gulp, options);
+	 gulp.task('lint:scripts', lintScripts);
+	 const lintStyles = require('./tasks/lint/styles')(gulp, options);
+	 gulp.task('lint:styles', lintStyles);
 
-	// Scripts
-	require('./tasks/scripts/headscripts')(gulp, plugins, options, onError);
-	require('./tasks/scripts/pagescripts')(gulp, plugins, options, onError);
-	require('./tasks/scripts/bodyscripts')(gulp, plugins, options, onError);
-	require('./tasks/scripts/build')(gulp, plugins, options, onError);
+	 // Scripts
+	 const scriptsBodyScripts = require('./tasks/scripts/bodyscripts')(gulp, options);
+	 gulp.task('scripts:bodyscripts', scriptsBodyScripts);
+	 const scriptsHeadScripts = require('./tasks/scripts/headscripts')(gulp, options);
+	 gulp.task('scripts:headscripts', scriptsHeadScripts);
+	 const scriptsPageScripts = require('./tasks/scripts/pagescripts')(gulp, options);
+	 gulp.task('scripts:pagescripts', scriptsPageScripts);
+	 gulp.task('scripts:build', gulp.parallel('scripts:bodyscripts', 'scripts:headscripts', 'scripts:pagescripts', 'lint:scripts'));
 
-	// Styles
-	require('./tasks/styles/sass-index')(gulp, plugins, options, onError);
-	require('./tasks/styles/sass')(gulp, plugins, options, onError);
-	require('./tasks/styles/build')(gulp, plugins, options, onError);
+	 // Styles
+	 const stylesSassIndex = require('./tasks/styles/sass-index')(gulp, options);
+	 gulp.task('styles:sass-index', stylesSassIndex);
+	 const stylesSass = require('./tasks/styles/sass')(gulp, options);
+	 gulp.task('styles:sass', stylesSass);
+	 gulp.task('styles:build', gulp.series('styles:sass-index', 'styles:sass', 'lint:styles'));
 
-	// Utilities
-	require('./tasks/utilities/browser-sync')(gulp, plugins, options, onError);
-	require('./tasks/utilities/watch')(gulp, plugins, options, onError);
+	 // require('./tasks/styles/build')(gulp, options);
 
-	// Combined tasks:
-	// Build
-	require('./tasks/build')(gulp, plugins, options, onError);
+	 // Utilities
+	 const utilitiesBrowserSync = require('./tasks/utilities/browser-sync')(gulp, options);
+	 gulp.task('utilities:browser-sync', utilitiesBrowserSync);
+	 const utilitiesWatch = require('./tasks/utilities/watch')(gulp, options);
+	 gulp.task('utilities:watch', utilitiesWatch);
 
-	// Default
-	require('./tasks/default')(gulp, plugins, options, onError);
+	 // Combined tasks:
+	 // Build
+	 gulp.task('build', gulp.series('clean:all', gulp.parallel(gulp.series('bower:build', 'images:sprite', 'styles:build'), 'fonts:build', 'images:imagemin', 'scripts:build')));
 
-	// Test
-	require('./tasks/test')(gulp, plugins, options, onError);
+	 // Default
+	 gulp.task('default', gulp.series('build', 'utilities:watch', 'utilities:browser-sync'));
 
+	 // Test
+	 gulp.task('test', gulp.parallel('lint:scripts', 'lint:styles'));
+
+
+	return options;
 };

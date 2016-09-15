@@ -1,6 +1,7 @@
 // Clean dist
-module.exports = function (gulp, plugins, options) {
-	gulp.task('clean:sprite', function () {
-		return plugins.del(options.styles.srcFolder + '/' + options.sprite.cssName);
-	});
+'use strict';
+const plugins = require('../../libs/plugins');
+
+module.exports = (gulp, options) => () => {
+	return plugins.del(options.styles.srcFolder + '/' + options.sprite.cssName);
 };

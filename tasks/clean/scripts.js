@@ -1,7 +1,7 @@
 // Clean script dist folder
-module.exports = function (gulp, plugins, options) {
-	gulp.task('clean:scripts', function () {
-		return plugins.del([options.scripts.dest + '/**/*.*', '!' + options.scripts.dest + '/.gitignore']);
-	});
-};
+'use strict';
+const plugins = require('../../libs/plugins');
 
+module.exports = (gulp, options) => () => {
+	return plugins.del([options.scripts.dest + '/**/*', '!' + options.scripts.dest + '/.gitignore']);
+};

@@ -1,7 +1,7 @@
 // Clean images dist folder
-module.exports = function (gulp, plugins, options) {
-	gulp.task('clean:images', function () {
-		return plugins.del([options.images.dest + '/**/*.*', '!' + options.images.dest + '/.gitignore']);
-	});
-};
+'use strict';
+const plugins = require('../../libs/plugins');
 
+module.exports = (gulp, options) => () => {
+	return plugins.del([options.images.dest + '/**/*', '!' + options.images.dest + '/.gitignore']);
+};
