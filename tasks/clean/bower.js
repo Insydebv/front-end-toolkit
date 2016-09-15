@@ -1,6 +1,7 @@
 // Clean dist
-module.exports = function (gulp, plugins, options) {
-	gulp.task('clean:bower', function () {
-		return plugins.del([options.bower.assetsDest + '/**/*.*', options.styles.srcFolder + '/' + options.bower.stylesFile, '!' + options.bower.assetsDest + '/.gitignore']);
-	});
+'use strict';
+const plugins = require('../../libs/plugins');
+
+module.exports = (gulp, options) => () => {
+	return plugins.del([options.bower.assetsDest + '/**/*', options.styles.srcFolder + '/' + options.bower.stylesFile, '!' + options.bower.assetsDest + '/.gitignore']);
 };

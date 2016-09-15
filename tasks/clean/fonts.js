@@ -1,7 +1,7 @@
 // Clean fonts dist folder
-module.exports = function (gulp, plugins, options) {
-	gulp.task('clean:fonts', function () {
-		return plugins.del([options.fonts.dest + '/**/*.*', '!' + options.fonts.dest + '/.gitignore']);
-	});
-};
+'use strict';
+const plugins = require('../../libs/plugins');
 
+module.exports = (gulp, options) => () => {
+	return plugins.del([options.fonts.dest + '/**/*', '!' + options.fonts.dest + '/.gitignore']);
+};

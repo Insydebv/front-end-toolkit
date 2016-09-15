@@ -1,7 +1,7 @@
 // Clean styles dist folder
-module.exports = function (gulp, plugins, options) {
-	gulp.task('clean:styles', function () {
-		return plugins.del([options.styles.dest + '/**/*.*', '!' + options.styles.dest + '/.gitignore']);
-	});
-}
+'use strict';
+const plugins = require('../../libs/plugins');
 
+module.exports = (gulp, options) => () => {
+	return plugins.del([options.styles.dest + '/**/*', '!' + options.styles.dest + '/.gitignore']);
+};
