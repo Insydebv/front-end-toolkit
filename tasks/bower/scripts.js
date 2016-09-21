@@ -11,7 +11,7 @@ module.exports = (gulp, options) => () => {
 		.pipe(plugins.sourcemaps.init())
 		.pipe(plugins.babel())
 		.pipe(plugins.concat(options.bower.scriptFile))
-		.pipe(plugins.uglify())
+		.pipe(!plugins.util.env.production ? plugins.util.noop() : plugins.uglify())
 		.pipe(plugins.sourcemaps.write('maps'))
 		.pipe(gulp.dest(options.scripts.dest))
 		;
