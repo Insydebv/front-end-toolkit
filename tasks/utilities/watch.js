@@ -17,7 +17,7 @@ module.exports = (gulp, options) => (done) => {
 		options.styles.srcFolder + '/**/*.{scss, sass}',
 		'!**/' + options.sprite.cssName,
 		"!**/" + options.bower.stylesFile
-	], gulp.series('styles:sass', 'lint:styles'));
+	], gulp.parallel('styles:sass', 'lint:styles'));
 	gulp.watch(options.fonts.src, gulp.series('fonts:build', reloadBrowser));
 	gulp.watch(options.bower.config, gulp.parallel('bower:assets', 'bower:scripts', gulp.series('bower:styles', 'styles:sass')));
 	gulp.watch([
