@@ -1,30 +1,46 @@
 // // Watch for changes
 'use strict';
 const plugins = require('../../libs/plugins');
+const path = require('path');
 
-// Reload  browser
-function reloadBrowser(done) {
-	plugins.browserSync.reload();
-	done();
-}
+// Watch for changes
+module.exports = (gulp, options) => () => {
 
-module.exports = (gulp, options) => (done) => {
-	gulp.watch(options.scripts.bodyScriptSrc, gulp.series('scripts:bodyscripts', gulp.parallel('lint:scripts', reloadBrowser)));
-	gulp.watch(options.scripts.headScriptSrc, gulp.series('scripts:headscripts', gulp.parallel('lint:scripts', reloadBrowser)));
-	gulp.watch(options.scripts.pageScriptSrc, gulp.series('scripts:pagescripts', gulp.parallel('lint:scripts', reloadBrowser)));
-	gulp.watch(options.styles.componentsSrc + '/**/*.scss', gulp.series('styles:sass-index'));
-	gulp.watch([
-		options.styles.srcFolder + '/**/*.{scss, sass}',
-		'!**/' + options.sprite.cssName,
-		"!**/" + options.bower.stylesFile
-	], gulp.series('styles:sass', 'lint:styles'));
-	gulp.watch(options.fonts.src + '/**/*', gulp.series('fonts:build', reloadBrowser));
-	gulp.watch(options.bower.config, gulp.parallel('bower:assets', 'bower:scripts', gulp.series('bower:styles', 'styles:sass')));
-	gulp.watch([
-		options.images.src,
-		'!' + options.sprite.srcFolder + '{,/**}'
-	], gulp.series('images:imagemin'));
-	gulp.watch(options.sprite.srcFolder + '/*' + options.sprite.retinaSuffix + '.png', gulp.series('images:sprite', 'styles:sass'));
-	gulp.watch(options.utilities.watchSrc, gulp.series(reloadBrowser));
-	done();
+	// Reload  browser
+	gulp.task('reloadBrowser', function (done) {
+		plugins.browserSync.reload();
+		done();
+	});
+	gulp.task('watchFont', function (done) {
+		plugins.sequence('fonts:build', 'reloadBrowser');
+		done();
+	});
+	gulp.task('watchImages', function (done) {
+		plugins.sequence('images:imagemin', 'reloadBrowser');
+		done();
+	});
+	gulp.task('watchSprite', function (done) {
+		plugins.sequence('images:imagemin', 'reloadBrowser');
+		done();
+	});
+	gulp.task('watchBower', function (done) {
+		plugins.sequence(['bower:assets', 'bower:scripts'], 'bower:styles', 'styles:sass', 'reloadBrowser');
+		done();
+	});
+
+	gulp.watch(options.scripts.bodyScriptSrc, ['scripts:bodyscripts']);
+	gulp.watch(options.scripts.headScriptSrc, ['scripts:headscripts']);
+	gulp.watch(path.join(options.scripts.pageScriptSrc, '/**/*.js'), ['scripts:pagescripts']);
+
+	gulp.watch(path.join(options.styles.componentsSrc + '/**/*.scss'), ['styles:sass-index']);
+	gulp.watch(["!" + options.styles.srcFolder + options.sprite.cssName, "!" + options.styles.srcFolder + options.bower.stylesFile, path.join(options.styles.srcFolder, '/**/*.{scss,sass}')], ['styles:sass', 'lint:styles']);
+
+	gulp.watch(options.fonts.src, ['watchFont']);
+	gulp.watch(options.bower.config, ['watchBower']);
+
+	gulp.watch(['!' + options.sprite.srcFolder + '{,/**}', options.images.src], ['images:imagemin', 'reloadBrowser']);
+
+	gulp.watch(options.sprite.srcFolder + '/*' + options.sprite.retinaSuffix + '.png', ['watchSprite']);
+
+	gulp.watch(options.utilities.watchSrc).on('change', plugins.browserSync.reload);
 };
