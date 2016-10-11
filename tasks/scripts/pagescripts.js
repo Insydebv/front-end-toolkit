@@ -45,8 +45,18 @@ module.exports = (gulp, options) => () => {
 				errorHandler: onError
 			}))
 			.pipe(plugins.sourcemaps.init())
-			.pipe(plugins.babel())
-			.pipe(!plugins.util.env.production ? plugins.util.noop() : plugins.uglify())
+			// Translate code to ES5 (especially useful when ES6 is used)
+			.pipe(plugins.babel({
+				presets: ['es2015']
+			}))
+			// Handle the imports used in the code
+			.pipe(plugins.browserify({
+				insertGlobals : true
+			}))
+			// Minify the code
+			.pipe(!plugins.util.env.production ? plugins.util.noop() : plugins.babel({
+				presets: ['babili']
+			}))
 			.pipe(plugins.sourcemaps.write('maps'))
 			.pipe(plugins.rename({ suffix: '.min' }))
 			.pipe(gulp.dest(options.scripts.dest))
