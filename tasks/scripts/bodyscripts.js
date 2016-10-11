@@ -20,9 +20,7 @@ module.exports = (gulp, options) => () => {
 			insertGlobals : true
 		}))
 		// Minify the code
-		.pipe(!plugins.util.env.production ? plugins.util.noop() : plugins.babel({
-			presets: ['babili']
-		}))
+		.pipe(!plugins.util.env.production ? plugins.util.noop() : plugins.uglify())
 		.pipe(plugins.sourcemaps.write('maps'))
 		.pipe(gulp.dest(options.scripts.dest))
 		;
