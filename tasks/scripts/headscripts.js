@@ -10,13 +10,8 @@ module.exports = (gulp, options) => () => {
 		}))
 		.pipe(plugins.filter('**/*.js'))
 		.pipe(plugins.sourcemaps.init())
-		.pipe(plugins.babel({
-			presets: ['es2015']
-		}))
+		.pipe(plugins.babel())
 		.pipe(plugins.concat(options.scripts.headScriptFile))
-		.pipe(plugins.browserify({
-			insertGlobals : true
-		}))
 		.pipe(!plugins.util.env.production ? plugins.util.noop() : plugins.babel({
 			presets: ['babili']
 		}))
