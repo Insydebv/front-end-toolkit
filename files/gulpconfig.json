@@ -20,6 +20,7 @@
     "bodyScriptSrc"     : ["src/script/body/**/*.js"],
     "headScriptSrc"     : ["src/script/head/**/*.js"],
     "pageScriptSrc"     : "src/script/page",
+    "testScriptSrc"     : ["src/script/body/**/*.spec.js", "src/script/head/**/*.spec.js", "src/script/page/**/*.spec.js"]
     "dest"	         	: "site/script",
     "headScriptFile"    : "headscripts.min.js",
     "bodyScriptFile"    : "script.min.js"

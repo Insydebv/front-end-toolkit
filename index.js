@@ -63,6 +63,8 @@ module.exports = (gulp, options) => {
 	 gulp.task('scripts:headscripts', scriptsHeadScripts);
 	 const scriptsPageScripts = require('./tasks/scripts/pagescripts')(gulp, options);
 	 gulp.task('scripts:pagescripts', scriptsPageScripts);
+	 const scriptsTestScripts = require('./tasks/scripts/testscripts')(gulp, options);
+	 gulp.task('scripts:testscripts', scriptsTestScripts);
 	 gulp.task('scripts:build', gulp.parallel('scripts:bodyscripts', 'scripts:headscripts', 'scripts:pagescripts', 'lint:scripts'));
 
 	 // Styles
