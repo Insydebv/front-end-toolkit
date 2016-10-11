@@ -35,6 +35,22 @@ module.exports = (gulp, options) => () => {
 			.pipe(gulp.dest(options.scripts.dest))
 	});
 
+	let test= folders.map(function(folder) {
+		return gulp.src(path.join(options.scripts.pageScriptSrc, folder, '/**/*.spec.js'))
+			.pipe(plugins.plumber({
+				errorHandler: onError
+			}))
+			.pipe(plugins.sourcemaps.init())
+			// Translate code to ES5 (especially useful when ES6 is used)
+			.pipe(plugins.babel())
+			// Handle the imports used in the code
+			.pipe(plugins.browserify({
+				insertGlobals : true
+			}))
+			.pipe(mocha({reporter: 'nyan'}));
+	});
+
+
 	// Parse root dir
 	let rootStream = gulp.src(path.join(options.scripts.pageScriptSrc, '/*.js'))
 			.pipe(plugins.plumber({
