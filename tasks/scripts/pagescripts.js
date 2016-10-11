@@ -23,9 +23,7 @@ module.exports = (gulp, options) => () => {
 			}))
 			.pipe(plugins.sourcemaps.init())
 			// Translate code to ES5 (especially useful when ES6 is used)
-			.pipe(plugins.babel({
-				presets: ['es2015']
-			}))
+			.pipe(plugins.babel())
 			// Handle the imports used in the code
 			.pipe(plugins.browserify({
 				insertGlobals : true
@@ -44,9 +42,7 @@ module.exports = (gulp, options) => () => {
 			}))
 			.pipe(plugins.sourcemaps.init())
 			// Translate code to ES5 (especially useful when ES6 is used)
-			.pipe(plugins.babel({
-				presets: ['es2015']
-			}))
+			.pipe(plugins.babel())
 			// Handle the imports used in the code
 			.pipe(plugins.browserify({
 				insertGlobals : true

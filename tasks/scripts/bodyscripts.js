@@ -11,9 +11,7 @@ module.exports = (gulp, options) => () => {
 		.pipe(plugins.filter('**/*.js'))
 		.pipe(plugins.sourcemaps.init())
 		// Translate code to ES5 (especially useful when ES6 is used)
-		.pipe(plugins.babel({
-			presets: ['es2015']
-		}))
+		.pipe(plugins.babel())
 		.pipe(plugins.concat(options.scripts.bodyScriptFile))
 		// Handle the imports used in the code
 		.pipe(plugins.browserify({
