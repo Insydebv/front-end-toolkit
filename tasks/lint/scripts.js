@@ -7,7 +7,7 @@ const through = require('through2');
 const path = require('path');
 
 module.exports = (gulp, options) => () => {
-	return gulp.src(options.scripts.bodyScriptSrc.concat(options.scripts.headScriptSrc, path.join(options.scripts.pageScriptSrc, '/**/*.js')))
+	return gulp.src(options.scripts.bodyScriptSrc.concat(options.scripts.headScriptSrc, options.scripts.pageScriptSrc))
 		.pipe(plugins.cached('lint:scripts'))
 		.pipe(plugins.plumber({
 			errorHandler: onError
