@@ -46,7 +46,7 @@ module.exports = (gulp, options) => () => {
 
 	gulp.watch(options.scripts.bodyScriptSrc, ['watchBodyScripts']);
 	gulp.watch(options.scripts.headScriptSrc, ['watchHeadScripts']);
-	gulp.watch(path.join(options.scripts.pageScriptSrc, '/**/*.js'), ['watchPageScripts']);
+	gulp.watch(options.scripts.pageScriptSrc, ['watchPageScripts']);
 
 	gulp.watch(path.join(options.styles.componentsSrc + '/**/*.scss'), ['styles:sass-index']);
 	gulp.watch(["!" + options.styles.srcFolder + options.sprite.cssName, "!" + options.styles.srcFolder + options.bower.stylesFile, path.join(options.styles.srcFolder, '/**/*.{scss,sass}')], ['styles:sass', 'lint:styles']);
