@@ -142,7 +142,7 @@ dest|`"site/images"`|Distribution images dir
 **scripts**|`object`|
 bodyScriptSrc|`["src/script/*.js"]`|Bodyscript source
 headScriptSrc|`["src/script/head/**/*.js"]`|Headscript source
-pageScriptSrc|`"src/script/page"`|Pagescript root folder
+pageScriptSrc|`["src/script/page"]`|Pagescript root folder and files
 dest|`"site/script"`|Distribution script dir
 headScriptFile|`"headscripts.min.js"`|Headscripts are concatenated into this file
 bodyScriptFile|`"script.min.js"`|Bodyscripts are concatenated into this file
