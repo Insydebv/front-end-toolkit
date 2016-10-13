@@ -43,10 +43,16 @@ module.exports = (gulp, options) => () => {
 	}
 
 	function getFolders(dir) {
-		return fs.readdirSync(dir)
-			.filter(function(file) {
-				return fs.statSync(path.join(dir, file)).isDirectory();
-			}).map(i => path.join(dir, i));
+		if(!fs.existsSync(dir)) {
+			return;
+		}
+		else {
+			return fs.readdirSync(dir)
+				.filter(function(file) {
+					return fs.statSync(path.join(dir, file)).isDirectory();
+				}).map(i => path.join(dir, i));
+		}
+
 	}
 
 	// parse all input paths
@@ -55,19 +61,21 @@ module.exports = (gulp, options) => () => {
 	// get all directories and subdirectories
 	let folders = srcFolders.reduce((prev, cur) => prev.concat(getFolders(cur)), []);
 
-	// Parse subfolders
-	let folderStream = folders.map(folder => gulp.src(path.join(folder, '/**/*.js'))
-		.pipe(plugins.plumber({
-			errorHandler: onError
-		}))
-		.pipe(plugins.sourcemaps.init())
-		.pipe(plugins.babel())
-		.pipe(plugins.concat(folder + '.js'))
-		.pipe(plugins.rename({ suffix: '.min', dirname: '' }))
-		.pipe(!plugins.util.env.production ? plugins.util.noop() : plugins.uglify())
-		.pipe(plugins.sourcemaps.write('maps'))
-		.pipe(gulp.dest(options.scripts.dest))
-	);
+	if(folders[0] !== undefined) {
+		// Parse subfolders
+		let folderStream = folders.map(folder => gulp.src(path.join(folder, '/**/*.js'))
+			.pipe(plugins.plumber({
+				errorHandler: onError
+			}))
+			.pipe(plugins.sourcemaps.init())
+			.pipe(plugins.babel())
+			.pipe(plugins.concat(folder + '.js'))
+			.pipe(plugins.rename({ suffix: '.min', dirname: '' }))
+			.pipe(!plugins.util.env.production ? plugins.util.noop() : plugins.uglify())
+			.pipe(plugins.sourcemaps.write('maps'))
+			.pipe(gulp.dest(options.scripts.dest))
+		);
+	}
 
 	// Parse root dir children and extra files
 	srcFolders.forEach(folder => srcFiles.push(path.join(folder, '/*.js')));
@@ -84,5 +92,10 @@ module.exports = (gulp, options) => () => {
 		;
 
 	// Return a merged stream to handle both `end` events
-	return plugins.mergeStream(folderStream, rootStream);
+	if(typeof folderStream == 'undefined') {
+		return rootStream;
+	}
+	else {
+		return plugins.mergeStream(folderStream, rootStream);
+	}
 };
