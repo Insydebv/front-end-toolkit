@@ -1,6 +1,6 @@
 {
   "name": "webdev-toolkit",
-  "version": "1.10.2",
+  "version": "1.12.5",
   "description": "Toolkit for creating and working with assets for web projects.",
   "main": "index.js",
   "dependencies": {
@@ -9,9 +9,10 @@
     "deep-assign": "^2.0.0",
     "del": "^2.2.1",
     "fs": "0.0.2",
-    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.0",
     "gulp-babel": "^6.1.2",
+    "gulp-cached": "^1.1.0",
     "gulp-concat": "^2.6.0",
     "gulp-filter": "^4.0.0",
     "gulp-flatmap": "^1.0.0",
@@ -28,6 +29,7 @@
     "gulp-rework": "^1.2.0",
     "gulp-sass": "^2.3.2",
     "gulp-sass-lint": "^1.2.0",
+    "gulp-sequence": "^0.4.6",
     "gulp-sourcemaps": "^1.6.0",
     "gulp-uglify": "^1.5.4",
     "gulp-util": "^3.0.7",

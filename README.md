@@ -78,7 +78,11 @@ We suggest using the following default folder layout. You can change it to suit 
       - these get concatenated into headscripts.min.js `scripts.bodyScriptFile`
     - page `scripts.pageScriptSrc`
       - file.js
-      - these aren't concatenated
+      - files in the root of this folder are not concatenated, just parsed to .min.js
+      - folder
+        - file_a.js
+        - file_b.js
+        - these get concatenated into folder.min.js
     - etc. 
   - styles `styles.srcFolder`
     - components `styles.componentsSrc`
@@ -138,7 +142,7 @@ dest|`"site/images"`|Distribution images dir
 **scripts**|`object`|
 bodyScriptSrc|`["src/script/*.js"]`|Bodyscript source
 headScriptSrc|`["src/script/head/**/*.js"]`|Headscript source
-pageScriptSrc|`["src/script/page/**/*.js"]`|Pagescript source
+pageScriptSrc|`["src/script/page/**/*.js"]`|Pagescript sources
 dest|`"site/script"`|Distribution script dir
 headScriptFile|`"headscripts.min.js"`|Headscripts are concatenated into this file
 bodyScriptFile|`"script.min.js"`|Bodyscripts are concatenated into this file

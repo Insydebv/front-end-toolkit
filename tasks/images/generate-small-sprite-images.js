@@ -2,6 +2,7 @@
 'use strict';
 const fs = require('fs');
 const plugins = require('../../libs/plugins');
+const onError = require('../../libs/onError');
 
 module.exports = (gulp, options) => () => {
 	return gulp.src(options.sprite.srcFolder + "/*" + options.sprite.retinaSuffix + ".png")

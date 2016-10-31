@@ -4,9 +4,11 @@ const plugins = require('../../libs/plugins');
 const onError = require('../../libs/onError');
 const jsHintErrorReporter = require('../../libs/jsHintErrorReporter');
 const through = require('through2');
+const path = require('path');
 
 module.exports = (gulp, options) => () => {
-	return gulp.src(options.scripts.bodyScriptSrc.concat(options.scripts.headScriptSrc, options.scripts.pageScriptSrc), {since: gulp.lastRun('lint:scripts')})
+	return gulp.src(options.scripts.bodyScriptSrc.concat(options.scripts.headScriptSrc, options.scripts.pageScriptSrc))
+		.pipe(plugins.cached('lint:scripts'))
 		.pipe(plugins.plumber({
 			errorHandler: onError
 		}))
