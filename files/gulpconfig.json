@@ -19,7 +19,7 @@
   "scripts": {
     "bodyScriptSrc"     : ["src/script/body/**/*.js"],
     "headScriptSrc"     : ["src/script/head/**/*.js"],
-    "pageScriptSrc"     : "src/script/page",
+    "pageScriptSrc"     : ["src/script/page/**/*.js"],
     "dest"	         	: "site/script",
     "headScriptFile"    : "headscripts.min.js",
     "bodyScriptFile"    : "script.min.js"
