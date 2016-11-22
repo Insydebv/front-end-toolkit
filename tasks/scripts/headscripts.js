@@ -12,6 +12,10 @@ module.exports = (gulp, options) => () => {
 		.pipe(plugins.sourcemaps.init())
 		.pipe(plugins.babel())
 		.pipe(plugins.concat(options.scripts.headScriptFile))
+		// Handle the imports used in the code
+			.pipe(plugins.browserify({
+			insertGlobals : true
+		}))
 		.pipe(!plugins.util.env.production ? plugins.util.noop() : plugins.uglify())
 		.pipe(plugins.sourcemaps.write('maps'))
 		.pipe(gulp.dest(options.scripts.dest))

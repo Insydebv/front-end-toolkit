@@ -10,9 +10,7 @@ module.exports = (gulp, options) => () => {
 		}))
 		.pipe(plugins.filter('**/*.js'))
 		.pipe(plugins.sourcemaps.init())
-		.pipe(plugins.babel({
-			presets: ['es2015']
-		}))
+		.pipe(plugins.babel())
 		.pipe(plugins.concat(options.scripts.bodyScriptFile))
 		// Handle imports used in the code
 		.pipe(plugins.browserify({
