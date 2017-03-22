@@ -13,7 +13,7 @@ module.exports = (gulp, options) => () => {
 			includePaths: options.styles.includePaths,
 			outputStyle: (!plugins.util.env.production ? "expanded" : "compressed"),
 		}))
-		.pipe(plugins.autoprefixer({browsers: ['last 3 versions']}))
+		.pipe(plugins.autoprefixer())
 		.pipe(plugins.sourcemaps.write('./map'))
 		.pipe(gulp.dest(options.styles.dest))
 		.pipe(plugins.browserSync.stream({match: '**/*.css'}))

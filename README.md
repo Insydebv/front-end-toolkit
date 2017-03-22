@@ -1,5 +1,5 @@
 # Webdev Toolkit
-A scalable modular Gulp 4 based assets pipeline.
+A scalable modular Gulp based assets pipeline.
 
 ## Getting Started
 
@@ -170,6 +170,17 @@ browserSyncHtdocs |`"d:\\php\\"`|Location of Apache htdocs for Browser Sync
 browserSyncOpen |`"external"`| Decide which URL to open automatically when Browsersync starts.
 watchSrc |`"templates/**/*.html"`|Glob with additional folders to watch, for example your template files or php views.
 
+### Autoprefixer
+Autoprefixer uses Browserslist, so you can specify the browsers you want to target in your project by queries like last 2 versions or > 5%.
+You can configure autoprefixer by setting the `browserslist` key in your `package.json` or `browserlist` config.
+```json
+{
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
+}
+```
 ### Bower
 Configuring bower can be done via `bower.json` and `.bowerrc` files in the root of your project.
 ### Babel
