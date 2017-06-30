@@ -1,10 +1,10 @@
 {
   "appRoot"            	: "site/",
-  "bower": {
+  "npm": {
     "assetFileTypes"	: "png,gif,svg,jpeg,jpg,woff,woff2,eot,ttf,otf",
     "scriptFile"    	: "bower.min.js",
     "stylesFile"    	: "_bower.scss",
-    "src"           	: "bower_components",
+    "src"           	: "node_modules",
     "assetsDest"    	: "site/dist",
     "config"            : "bower.json"
   },
