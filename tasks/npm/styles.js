@@ -1,10 +1,10 @@
-// Generate Bower SCSS from source CSS with corrected asset paths
+// Generate NPM SCSS from source CSS with corrected asset paths
 'use strict';
 const plugins = require('../../libs/plugins');
 const path = require('path');
 const slash = require('slash');
 const fs = require('fs');
-const bowerCopyFiles = [];
+const npmCopyFiles = [];
 
 module.exports = function (gulp, options) {
 	var npmAssetsDest = options.npm.assetsDest;
@@ -30,22 +30,22 @@ module.exports = function (gulp, options) {
 							fullUrl = fullUrl.split("?");
 							if (fs.existsSync(fullUrl[0])) {
 								npmCopyFiles.push(fullUrl[0]);
-								return slash(path.relative('css', fullUrl[0]).replace(/bower_components/, npmAssetsDest) + '?' + fullUrl[1]);
+								return slash(path.relative('css', fullUrl[0]).replace(/node_modules/, npmAssetsDest) + '?' + fullUrl[1]);
 							}
 						}
 						else if (fullUrl.indexOf("#") > -1) {
 							// Handle paths with #
 							fullUrl = fullUrl.split("#");
 							if (fs.existsSync(fullUrl[0])) {
-								bowerCopyFiles.push(fullUrl[0]);
-								return slash(path.relative('css', fullUrl[0]).replace(/bower_components/, npmAssetsDest) + '?' + fullUrl[1]);
+								npmCopyFiles.push(fullUrl[0]);
+								return slash(path.relative('css', fullUrl[0]).replace(/node_modules/, npmAssetsDest) + '?' + fullUrl[1]);
 							}
 						}
 						else {
 							// Handle clean paths
 							if (fs.existsSync(fullUrl)) {
-								bowerCopyFiles.push(fullUrl);
-								return slash(path.relative('css', fullUrl).replace(/bower_components/, npmAssetsDest));
+								npmCopyFiles.push(fullUrl);
+								return slash(path.relative('css', fullUrl).replace(/node_modules/, npmAssetsDest));
 							}
 						}
 						return url;

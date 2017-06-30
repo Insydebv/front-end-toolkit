@@ -14,19 +14,19 @@ module.exports = (gulp, options) => {
 
 	 // Load tasks
 
-	 // Bower tasks
-	 const bowerAssets = require('./tasks/bower/assets')(gulp, options);
-	 gulp.task("bower:assets", bowerAssets)
+	 // Npm tasks
+	 const npmAssets = require('./tasks/npm/assets')(gulp, options);
+	 gulp.task("npm:assets", npmAssets)
 
-	 const bowerScripts = require('./tasks/bower/scripts')(gulp, options);
-	 gulp.task("bower:scripts", bowerScripts)
-	 const bowerStyles = require('./tasks/bower/styles')(gulp, options);
-	 gulp.task("bower:styles", bowerStyles)
-	 gulp.task('bower:build', plugins.sequence('bower:assets', 'bower:scripts', 'bower:styles'));
+	 const npmScripts = require('./tasks/npm/scripts')(gulp, options);
+	 gulp.task("npm:scripts", npmScripts)
+	 const npmStyles = require('./tasks/npm/styles')(gulp, options);
+	 gulp.task("npm:styles", npmStyles)
+	 gulp.task('npm:build', plugins.sequence('npm:assets', 'npm:scripts', 'npm:styles'));
 
 	 // Clean
-	 const cleanBower = require('./tasks/clean/bower')(gulp, options);
-	 gulp.task('clean:bower', cleanBower);
+	 const cleanNpm = require('./tasks/clean/npm')(gulp, options);
+	 gulp.task('clean:npm', cleanNpm);
 	 const cleanFonts = require('./tasks/clean/fonts')(gulp, options);
 	 gulp.task('clean:fonts', cleanFonts);
 	 const cleanImages = require('./tasks/clean/images')(gulp, options);
@@ -37,7 +37,7 @@ module.exports = (gulp, options) => {
 	 gulp.task('clean:sprite', cleanSprite);
 	 const cleanStyles = require('./tasks/clean/styles')(gulp, options);
 	 gulp.task('clean:styles', cleanStyles);
-	 gulp.task('clean:all', plugins.sequence('clean:bower', 'clean:fonts', 'clean:images', 'clean:scripts', 'clean:styles', 'clean:sprite'));
+	 gulp.task('clean:all', plugins.sequence('clean:npm', 'clean:fonts', 'clean:images', 'clean:scripts', 'clean:styles', 'clean:sprite'));
 
 	 // Fonts
 	 const fontsBuild = require('./tasks/fonts/build')(gulp, options);
@@ -83,7 +83,7 @@ module.exports = (gulp, options) => {
 
 	 // Combined tasks:
 	 // Build
-	 gulp.task('build', plugins.sequence('clean:all', 'bower:build', 'images:sprite', 'styles:build', ['fonts:build', 'images:imagemin', 'scripts:build']));
+	 gulp.task('build', plugins.sequence('clean:all', 'npm:build', 'images:sprite', 'styles:build', ['fonts:build', 'images:imagemin', 'scripts:build']));
 
 	 // Default
 	 gulp.task('default', plugins.sequence('build', 'utilities:watch', 'utilities:browser-sync'));

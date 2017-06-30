@@ -4,7 +4,7 @@ const plugins = require('../../libs/plugins');
 const onError = require('../../libs/onError');
 
 module.exports = (gulp, options) => () => {
-	return gulp.src(plugins.mainBowerFiles('**/*.js'), {base: options.npm.src})
+	return gulp.src(plugins.mainNowerFiles('**/*.js'), {base: options.npm.src})
 		.pipe(plugins.plumber({
 			errorHandler: onError
 		}))

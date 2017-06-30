@@ -7,7 +7,6 @@ module.exports = require('gulp-load-plugins')({
 		"deep-assign",
 		"del",
 		"jshint-stylish",
-		"main-bower-files",
 		"merge-stream",
 		"rework-plugin-url",
 		"sass-index",

@@ -2,11 +2,11 @@
   "appRoot"            	: "site/",
   "npm": {
     "assetFileTypes"	: "png,gif,svg,jpeg,jpg,woff,woff2,eot,ttf,otf",
-    "scriptFile"    	: "bower.min.js",
-    "stylesFile"    	: "_bower.scss",
+    "scriptFile"    	: "npm.min.js",
+    "stylesFile"    	: "_npm.scss",
     "src"           	: "node_modules",
     "assetsDest"    	: "site/dist",
-    "config"            : "bower.json"
+    "config"            : "package.json"
   },
   "fonts": {
     "src"            	: "src/fonts/**/*",
@@ -31,8 +31,8 @@
     "componentsIgnore"	: [],
     "dest"         		: "site/css",
     "lintConfig"     	: "node_modules/webdev-scss-styleguide/.sass-lint.yml",
-    "lintIgnore"		: ["src/styles/_bower.scss", "src/styles/_sprite.scss"],
-    "includePaths"   	: ["bower_components"]
+    "lintIgnore"		: ["src/styles/_npm.scss", "src/styles/_sprite.scss"],
+    "includePaths"   	: ["node_modules"]
   },
   "sprite": {
     "src"			 	: "src/images/sprite/*.png",
