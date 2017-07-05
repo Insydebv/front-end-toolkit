@@ -58,6 +58,10 @@ module.exports = (gulp, options) => {
 	 gulp.task('lint:styles', lintStyles);
 
 	 // Scripts
+	 const scriptsStealScripts = require('./tasks/scripts/steal')(gulp, options);
+	 gulp.task('scripts:steal', scriptsStealScripts);
+	 const scriptsBundleScripts = require('./tasks/scripts/bundle')(gulp, options);
+	 gulp.task('scripts:bundle', scriptsBundleScripts);
 	 const scriptsBodyScripts = require('./tasks/scripts/bodyscripts')(gulp, options);
 	 gulp.task('scripts:bodyscripts', scriptsBodyScripts);
 	 const scriptsHeadScripts = require('./tasks/scripts/headscripts')(gulp, options);

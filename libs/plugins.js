@@ -2,6 +2,7 @@ module.exports = require('gulp-load-plugins')({
 	pattern: [
 		"gulp-*",
 		"gulp.*",
+		"browserify",
 		"beepbeep",
 		"browser-sync",
 		"deep-assign",
