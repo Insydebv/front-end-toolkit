@@ -11,5 +11,6 @@ module.exports = require('gulp-load-plugins')({
 		"merge-stream",
 		"rework-plugin-url",
 		"sass-index",
+		"steal-tools",
 	]
 });

@@ -21,6 +21,14 @@ module.exports = (gulp, options) => () => {
 		plugins.browserSync.reload();
 		done();
 	});
+	/* steal watcher */
+	gulp.task('watchScripts', ['lint:scripts'], function (done) {
+    plugins.stealTools.watch({}, {
+      deps: true,
+      dest: 'site/assets',
+    });
+		done();
+	});
 	gulp.task('watchFont', ['fonts:build'], function (done) {
 		plugins.browserSync.reload();
 		done();
@@ -47,6 +55,7 @@ module.exports = (gulp, options) => () => {
 	gulp.watch(options.scripts.bodyScriptSrc, ['watchBodyScripts']);
 	gulp.watch(options.scripts.headScriptSrc, ['watchHeadScripts']);
 	gulp.watch(options.scripts.pageScriptSrc, ['watchPageScripts']);
+	gulp.watch(options.scripts.pageScriptSrc, ['watchScripts']);
 
 	gulp.watch(path.join(options.styles.componentsSrc + '/**/*.scss'), ['styles:sass-index']);
 	gulp.watch(["!" + options.styles.srcFolder + options.sprite.cssName, "!" + options.styles.srcFolder + options.npm.stylesFile, path.join(options.styles.srcFolder, '/**/*.{scss,sass}')], ['styles:sass', 'lint:styles']);

@@ -49,5 +49,6 @@
     "browserSyncHtdocs" : "d:\\php\\",
     "browserSyncOpen"   : "external",
     "watchSrc"          : "templates/**/*.html"
-  }
+  },
+  "stealTools": {}
 }
