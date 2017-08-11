@@ -57,13 +57,7 @@ module.exports = (gulp, options) => {
 	 // Scripts
 	 const scriptsStealScripts = require('./tasks/scripts/steal')(gulp, options);
 	 gulp.task('scripts:steal', scriptsStealScripts);
-	 const scriptsBodyScripts = require('./tasks/scripts/bodyscripts')(gulp, options);
-	 gulp.task('scripts:bodyscripts', scriptsBodyScripts);
-	 const scriptsHeadScripts = require('./tasks/scripts/headscripts')(gulp, options);
-	 gulp.task('scripts:headscripts', scriptsHeadScripts);
-	 const scriptsPageScripts = require('./tasks/scripts/pagescripts')(gulp, options);
-	 gulp.task('scripts:pagescripts', scriptsPageScripts);
-	 gulp.task('scripts:build', ['scripts:bodyscripts', 'scripts:headscripts', 'scripts:pagescripts', 'lint:scripts']);
+	 gulp.task('scripts:build', ['scripts:steal', 'lint:scripts']);
 
 	 // Styles
 	 const stylesSassIndex = require('./tasks/styles/sass-index')(gulp, options);
