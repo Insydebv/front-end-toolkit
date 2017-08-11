@@ -16,7 +16,7 @@ module.exports = function (gulp, options) {
 
 	return function(){
 		return gulp.src(plugins.npmfiles({
-      nodeModulesPath: options.npm.src,
+      nodeModulesPath: '../../../../' + options.npm.src,
       packageJsonPath: options.npm.config,
     }))
 			.pipe(plugins.filter([
