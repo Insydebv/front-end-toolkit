@@ -12,5 +12,6 @@ module.exports = require('gulp-load-plugins')({
 		"rework-plugin-url",
 		"sass-index",
 		"steal-tools",
+    "npmfiles"
 	]
 });

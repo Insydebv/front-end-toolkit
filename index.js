@@ -17,12 +17,9 @@ module.exports = (gulp, options) => {
 	 // Npm tasks
 	 const npmAssets = require('./tasks/npm/assets')(gulp, options);
 	 gulp.task("npm:assets", npmAssets)
-
-	 const npmScripts = require('./tasks/npm/scripts')(gulp, options);
-	 gulp.task("npm:scripts", npmScripts)
 	 const npmStyles = require('./tasks/npm/styles')(gulp, options);
 	 gulp.task("npm:styles", npmStyles)
-	 gulp.task('npm:build', plugins.sequence('npm:assets', 'npm:scripts', 'npm:styles'));
+	 gulp.task('npm:build', plugins.sequence('npm:assets', 'npm:styles'));
 
 	 // Clean
 	 const cleanNpm = require('./tasks/clean/npm')(gulp, options);
@@ -60,8 +57,6 @@ module.exports = (gulp, options) => {
 	 // Scripts
 	 const scriptsStealScripts = require('./tasks/scripts/steal')(gulp, options);
 	 gulp.task('scripts:steal', scriptsStealScripts);
-	 const scriptsBundleScripts = require('./tasks/scripts/bundle')(gulp, options);
-	 gulp.task('scripts:bundle', scriptsBundleScripts);
 	 const scriptsBodyScripts = require('./tasks/scripts/bodyscripts')(gulp, options);
 	 gulp.task('scripts:bodyscripts', scriptsBodyScripts);
 	 const scriptsHeadScripts = require('./tasks/scripts/headscripts')(gulp, options);

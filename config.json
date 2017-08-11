@@ -2,8 +2,7 @@
   "appRoot"            	: "site/",
   "npm": {
     "assetFileTypes"	: "png,gif,svg,jpeg,jpg,woff,woff2,eot,ttf,otf",
-    "scriptFile"    	: "npm.min.js",
-    "stylesFile"    	: "_npm.scss",
+    "stylesFile"    	: "_bundle.scss",
     "src"           	: "node_modules",
     "assetsDest"    	: "site/dist",
     "config"            : "package.json"

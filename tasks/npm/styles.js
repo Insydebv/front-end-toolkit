@@ -15,7 +15,10 @@ module.exports = function (gulp, options) {
 	npmAssetsDest = npmAssetsDest.replace(options.appRoot, "");
 
 	return function(){
-		return gulp.src(plugins.mainNpmFiles(), {base: options.npm.src})
+		return gulp.src(plugins.npmfiles({
+      nodeModulesPath: options.npm.src,
+      packageJsonPath: options.npm.config,
+    }))
 			.pipe(plugins.filter([
 				'**/*.css'
 			]))
