@@ -16,12 +16,7 @@
     "dest"            	: "site/images"
   },
   "scripts": {
-    "bodyScriptSrc"     : ["src/script/body/**/*.js"],
-    "headScriptSrc"     : ["src/script/head/**/*.js"],
-    "pageScriptSrc"     : ["src/script/page/**/*.js"],
-    "dest"	         	: "site/script",
-    "headScriptFile"    : "headscripts.min.js",
-    "bodyScriptFile"    : "script.min.js"
+    "src"               : ["src/script/**/*.js"]
   },
   "styles": {
     "src"          		: ["src/styles/styles.scss"],

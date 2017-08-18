@@ -55,35 +55,26 @@ We suggest using the following default folder layout. You can change it to suit 
 * node_modules
 * site `appRoot`
   - css `styles.dest`
-  - dist `bower.assetsDest`
+  - dist `npm.assetsDest`
     - package-name
       - file.png
       - file.woff
-      - etc. `bower.assetFileTypes`
+      - etc. `npm.assetFileTypes`
   - images `images.dest`
     - file.jpg
     - sprite.png `sprite.imgName`
     - sprite@2x.png `sprite.retinaImgName`
-  - script `scripts.dest`
 * src
   - images `images.scr`
     - sprite `sprite.srcFolder`
       - image@2x.png
   - script
-    - body `scripts.bodyScriptSrc`
-      - file.js
-      - these get concatenated into script.min.js `scripts.bodyScriptFile`
-    - head `scripts.headScriptSrc`
-      - file.js
-      - these get concatenated into headscripts.min.js `scripts.bodyScriptFile`
-    - page `scripts.pageScriptSrc`
-      - file.js
-      - files in the root of this folder are not concatenated, just parsed to .min.js
-      - folder
-        - file_a.js
-        - file_b.js
-        - these get concatenated into folder.min.js
-    - etc. 
+    - file.js
+    - folder
+      - file_a.js
+      - file_b.js
+		- these get concatenated into folder.min.js
+      - etc. 
   - styles `styles.srcFolder`
     - components `styles.componentsSrc`
     - _sprite.scss `sprite.cssName`
@@ -140,12 +131,7 @@ dest|`"site/fonts"`|Distribution fonts dir
 src           |`"src/images/**"`|Images source dir
 dest|`"site/images"`|Distribution images dir
 **scripts**|`object`|
-bodyScriptSrc|`["src/script/*.js"]`|Bodyscript source
-headScriptSrc|`["src/script/head/**/*.js"]`|Headscript source
-pageScriptSrc|`["src/script/page/**/*.js"]`|Pagescript sources
-dest|`"site/script"`|Distribution script dir
-headScriptFile|`"headscripts.min.js"`|Headscripts are concatenated into this file
-bodyScriptFile|`"script.min.js"`|Bodyscripts are concatenated into this file
+src|`["src/script/*.js"]`|Script sources
 **styles**|`object`|
 src|`["src/styles/styles.scss"]`|Stylesheets that are parsed
 srcFolder        |`"src/styles"`|Stylesheets source folder

@@ -36,7 +36,7 @@ module.exports = (gulp, options) => () => {
 		done();
 	});
 
-  gulp.watch(options.scripts.pageScriptSrc, ['watchScripts']);
+  gulp.watch(options.scripts.src, ['watchScripts']);
 
 	gulp.watch(path.join(options.styles.componentsSrc + '/**/*.scss'), ['styles:sass-index']);
 	gulp.watch(["!" + options.styles.srcFolder + options.sprite.cssName, "!" + options.styles.srcFolder + options.npm.stylesFile, path.join(options.styles.srcFolder, '/**/*.{scss,sass}')], ['styles:sass', 'lint:styles']);
