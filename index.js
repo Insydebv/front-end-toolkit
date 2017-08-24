@@ -5,7 +5,7 @@ module.exports = (gulp, options) => {
 
   // Assign options
   const defaultOptions = require(__dirname + '/config.json');
-  options = plugins.deepAssign(defaultOptions, options);
+  options = Object.assign(defaultOptions, options);
 
   // Load tasks
 

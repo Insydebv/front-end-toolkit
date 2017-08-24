@@ -6,7 +6,6 @@
   "dependencies": {
     "beepbeep": "^1.2.0",
     "browser-sync": "^2.18.13",
-    "deep-assign": "^2.0.0",
     "del": "^3.0.0",
     "eslint": "^4.4.1",
     "fs": "0.0.1-security",
