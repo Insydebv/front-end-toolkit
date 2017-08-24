@@ -7,8 +7,8 @@ const fs = require('fs');
 const npmCopyFiles = [];
 
 module.exports = function (gulp, options) {
-	var npmAssetsDest = options.npm.assetsDest;
-	if (npmAssetsDest.substring(0, 1) == '/') {
+	let npmAssetsDest = options.npm.assetsDest;
+	if (npmAssetsDest.substring(0, 1) === '/') {
 		npmAssetsDest = npmAssetsDest.substring(1);
 	}
 	// Substract appRoot to get the correct path for the stylesheet
@@ -23,11 +23,11 @@ module.exports = function (gulp, options) {
 				'**/*.css'
 			]))
 			.pipe(plugins.flatmap(function (stream, file) {
-				var dirName = path.dirname(file.path);
+				const dirName = path.dirname(file.path);
 
 				return stream
 					.pipe(plugins.rework(plugins.reworkPluginUrl(function (url) {
-						var fullUrl = path.join(dirName, url);
+						let fullUrl = path.join(dirName, url);
 						if (fullUrl.indexOf("?") > -1) {
 							// Handle paths with ?
 							fullUrl = fullUrl.split("?");

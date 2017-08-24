@@ -4,7 +4,6 @@ const plugins = require('../../libs/plugins');
 const onError = require('../../libs/onError');
 const jsHintErrorReporter = require('../../libs/jsHintErrorReporter');
 const through = require('through2');
-const path = require('path');
 
 module.exports = (gulp, options) => () => {
   return gulp.src(options.scripts.src)
@@ -14,10 +13,8 @@ module.exports = (gulp, options) => () => {
     }))
     .pipe(plugins.eslint())
     .pipe(plugins.eslint.format())
-    .pipe(plugins.eslint.results(results => {
-      // Called once for all ESLint results.
-      console.log(`Total Results: ${results.length}`);
-      console.log(`Total Warnings: ${results.warningCount}`);
-      console.log(`Total Errors: ${results.errorCount}`);
-    }));
+    // .pipe(through.obj(jsHintErrorReporter))
+  // plug in custom error reporter https://github.com/adametry/gulp-eslint/issues/135
+  // https://stackoverflow.com/questions/36207566/throw-a-gulp-notify-message-when-gulp-eslint-fails
+    ;
 };

@@ -5,7 +5,6 @@ module.exports = require('gulp-load-plugins')({
 		"browserify",
 		"beepbeep",
 		"browser-sync",
-		"deep-assign",
 		"del",
 		"jshint-stylish",
 		"merge-stream",
