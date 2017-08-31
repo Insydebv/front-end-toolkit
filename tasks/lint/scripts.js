@@ -2,19 +2,26 @@
 'use strict';
 const plugins = require('../../libs/plugins');
 const onError = require('../../libs/onError');
-const jsHintErrorReporter = require('../../libs/jsHintErrorReporter');
-const through = require('through2');
+const path = require('path');
+const notifier = require('node-notifier');
 
 module.exports = (gulp, options) => () => {
   return gulp.src(options.scripts.src)
     .pipe(plugins.cached('lint:scripts'))
-    .pipe(plugins.plumber({
-      errorHandler: onError
-    }))
+    .pipe(plugins.plumber())
     .pipe(plugins.eslint())
     .pipe(plugins.eslint.format())
-    // .pipe(through.obj(jsHintErrorReporter))
-  // plug in custom error reporter https://github.com/adametry/gulp-eslint/issues/135
-  // https://stackoverflow.com/questions/36207566/throw-a-gulp-notify-message-when-gulp-eslint-fails
-    ;
+    // Manually call notifier with the gulp icon to prevent breaking the stream
+    .pipe(plugins.eslint.results(results => {
+      if (results.errorCount) {
+        notifier.notify({
+          icon: path.join(__dirname, '../../../gulp-notify', 'assets', 'gulp-error.png'),
+          title: 'Task Failed [gulp-eslint]',
+          message: 'See console',
+          sound: 'Beep'
+        });
+      }
+    }))
+    // uit lean library
+    .pipe(plugins.util.env.production ? plugins.eslint.failAfterError() : plugins.util.noop());
 };

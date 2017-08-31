@@ -39,8 +39,7 @@
     "rework-plugin-url": "^1.1.0",
     "sass-index": "^1.0.1",
     "slash": "^1.0.0",
-    "steal-tools": "^1.8.2",
-    "through2": "^2.0.1",
+    "steal-tools": "^1.8.3",
     "vinyl-buffer": "^1.0.0",
     "webdev-scss-styleguide": "^1.0.2"
   },
