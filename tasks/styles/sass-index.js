@@ -3,9 +3,9 @@
 const plugins = require('../../libs/plugins');
 
 module.exports = (gulp, options) => () => {
-	return plugins.sassIndex({
-		dir: options.styles.componentsSrc,
-		extensions: ['.scss'],
-		ignore: options.styles.componentsIgnore
-	});
+  return plugins.sassIndex({
+    dir: options.styles.componentsSrc,
+    extensions: ['.scss'],
+    ignore: options.styles.componentsIgnore
+  });
 };

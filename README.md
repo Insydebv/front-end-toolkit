@@ -43,7 +43,7 @@ require('webdev-toolkit')(gulp, options);
 ```
 
 ## Features
-This toolkit provides your total assets pipeline. From gathering files from Bower dependencies, generating sprite images, minifying images and scripts to generating CSS from Sass and injecting it into your browser with Browser Sync. 
+This toolkit provides your total assets pipeline. From gathering files from NPM dependencies, minifying images and scripts to generating CSS from Sass and injecting it into your browser with Browser Sync. 
 This leaves you with time to focus on the things that really matter!
 * Loads individual tasks from the webdev-toolkit for use in your project.
 * Easily integrates into your gulpfile.js without breaking your existing tasks.
@@ -65,9 +65,7 @@ We suggest using the following default folder layout. You can change it to suit 
     - sprite.png `sprite.imgName`
     - sprite@2x.png `sprite.retinaImgName`
 * src
-  - images `images.scr`
-    - sprite `sprite.srcFolder`
-      - image@2x.png
+  - images `images.src`
   - script
     - file.js
     - folder
@@ -77,8 +75,7 @@ We suggest using the following default folder layout. You can change it to suit 
       - etc. 
   - styles `styles.srcFolder`
     - components `styles.componentsSrc`
-    - _sprite.scss `sprite.cssName`
-    - _bower.scss `bower.stylesFile`
+    - _bundle.scss `npm.stylesFile`
     - styles.scss `styles.src`
 * templates `utilities.watchSrc`
   - file.html 
@@ -141,16 +138,6 @@ dest         |`"site/css"`|Distribution css dir
 lintConfig     |`"node_modules/scss-styleguide/.sass-lint.yml"`|Sass-lint config
 lintIgnore|`["src/styles/_bower.scss", "src/styles/_sprite.scss"]`|Glob with files to be ignored by sass-lint
 includePaths   |`["bower_components"]`|Sass includepaths
-**sprite**|`object`|
-src|`"src/images/sprite/*.png"`|Sprite source files
-srcFolder"|`"src/images/sprite"`|Sprite source folder
-imgName|`"sprite.png"`|Non retina sprite image name
-retinaImgName|`"sprite@2x.png"`|Retina sprite image name
-cssName|`"../src/styles/_sprite.scss"`|Sprite SCSS source destination (include in styles.scss)
-imgPath|`"../images/sprite.png"`|Non retina sprite image path for CSS
-retinaImgPath|`"../images/sprite@2x.png"`|Retina sprite image path for CSS
-retinaSrcFilter|`"src/images/sprite/*@2x.png"`|Retina SRC filter
-retinaSuffix |`"@2x"`|Retina files suffix
 **utilities**|`object`|
 browserSyncHtdocs |`"d:\\php\\"`|Location of Apache htdocs for Browser Sync
 browserSyncOpen |`"external"`| Decide which URL to open automatically when Browsersync starts.

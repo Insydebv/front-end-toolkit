@@ -16,7 +16,7 @@
     "dest"            	: "site/images"
   },
   "scripts": {
-    "src"     : ["src/script/**/*.js"]
+    "src"               : ["src/script/**/*.js"]
   },
   "styles": {
     "src"          		: ["src/styles/styles.scss"],
@@ -24,20 +24,7 @@
     "componentsSrc"		: "src/styles/components",
     "componentsIgnore"	: [],
     "dest"         		: "site/css",
-    "lintConfig"     	: "node_modules/webdev-scss-styleguide/.sass-lint.yml",
-    "lintIgnore"		: ["src/styles/_npms.scss", "src/styles/_sprite.scss"],
     "includePaths"   	: ["node_modules"]
-  },
-  "sprite": {
-    "src"			 	: "src/images/sprite/*.png",
-    "srcFolder"			: "src/images/sprite",
-    "imgName"		 	: "sprite.png",
-    "retinaImgName"		: "sprite@2x.png",
-    "cssName"		 	: "_sprite.scss",
-    "imgPath"		 	: "../images/sprite.png",
-    "retinaImgPath"		: "../images/sprite@2x.png",
-    "retinaSrcFilter"	: "src/images/sprite/*@2x.png",
-    "retinaSuffix" 		: "@2x"
   },
   "utilities": {
     "browserSyncHtdocs" : "d:\\php\\",

@@ -25,23 +25,17 @@ module.exports = (gulp, options) => {
   gulp.task('clean:images', cleanImages);
   const cleanScripts = require('./tasks/clean/scripts')(gulp, options);
   gulp.task('clean:scripts', cleanScripts);
-  const cleanSprite = require('./tasks/clean/sprite')(gulp, options);
-  gulp.task('clean:sprite', cleanSprite);
   const cleanStyles = require('./tasks/clean/styles')(gulp, options);
   gulp.task('clean:styles', cleanStyles);
-  gulp.task('clean:all', plugins.sequence('clean:npm', 'clean:fonts', 'clean:images', 'clean:scripts', 'clean:styles', 'clean:sprite'));
+  gulp.task('clean:all', plugins.sequence('clean:npm', 'clean:fonts', 'clean:images', 'clean:scripts', 'clean:styles'));
 
   // Fonts
   const fontsBuild = require('./tasks/fonts/build')(gulp, options);
   gulp.task('fonts:build', fontsBuild);
 
   // Images
-  const imagesGenerateSmallSpriteImages = require('./tasks/images/generate-small-sprite-images')(gulp, options);
-  gulp.task('images:generate-small-sprite-images', imagesGenerateSmallSpriteImages);
   const imagesImagemin = require('./tasks/images/imagemin')(gulp, options);
   gulp.task('images:imagemin', imagesImagemin);
-  const imagesSprite = require('./tasks/images/sprite')(gulp, options);
-  gulp.task('images:sprite', ['images:generate-small-sprite-images'], imagesSprite);
 
   // Lint
   const lintScripts = require('./tasks/lint/scripts')(gulp, options);
@@ -69,7 +63,7 @@ module.exports = (gulp, options) => {
 
   // Combined tasks:
   // Build
-  gulp.task('build', plugins.sequence('clean:all', 'npm:build', 'images:sprite', 'styles:build', ['fonts:build', 'images:imagemin', 'scripts:build']));
+  gulp.task('build', plugins.sequence('clean:all', 'npm:build', 'styles:build', ['fonts:build', 'images:imagemin', 'scripts:build']));
 
   // Default
   gulp.task('default', plugins.sequence('build', 'utilities:watch', 'utilities:browser-sync'));

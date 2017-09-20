@@ -22,6 +22,5 @@ module.exports = (gulp, options) => () => {
         });
       }
     }))
-    // uit lean library
     .pipe(plugins.util.env.production ? plugins.eslint.failAfterError() : plugins.util.noop());
 };
