@@ -2,17 +2,14 @@
 'use strict';
 const plugins = require('../../libs/plugins');
 const onError = require('../../libs/onError');
-const jsHintErrorReporter = require('../../libs/jsHintErrorReporter');
-const through = require('through2');
 const path = require('path');
+const notifier = require('node-notifier');
 
 module.exports = (gulp, options) => () => {
-	return gulp.src(options.scripts.bodyScriptSrc.concat(options.scripts.headScriptSrc, options.scripts.pageScriptSrc))
-		.pipe(plugins.cached('lint:scripts'))
-		.pipe(plugins.plumber({
-			errorHandler: onError
-		}))
-		.pipe(plugins.jshint())
-		.pipe(plugins.jshint.reporter(plugins.jshintStylish))
-		.pipe(through.obj(jsHintErrorReporter));
+  return gulp.src(options.scripts.src)
+    .pipe(plugins.cached('lint:scripts'))
+    .pipe(plugins.plumber())
+    .pipe(plugins.eslint())
+    .pipe(plugins.eslint.format())
+    .pipe(plugins.util.env.production ? plugins.eslint.failAfterError() : plugins.util.noop());
 };
