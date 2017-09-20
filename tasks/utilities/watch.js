@@ -8,18 +8,10 @@ module.exports = (gulp, options) => () => {
 
 	// Reload browser after tasks are finished
 	// This will be easier in gulp 4.x.x
-
-	gulp.task('watchBodyScripts', ['scripts:bodyscripts', 'lint:scripts'], function (done) {
-		plugins.browserSync.reload();
-		done();
-	});
-	gulp.task('watchHeadScripts', ['scripts:headscripts', 'lint:scripts'], function (done) {
-		plugins.browserSync.reload();
-		done();
-	});
-	gulp.task('watchPageScripts', ['scripts:pagescripts', 'lint:scripts'], function (done) {
-		plugins.browserSync.reload();
-		done();
+	/* steal watcher */
+	gulp.task('watchScripts', ['lint:scripts'], function (done) {
+    plugins.browserSync.reload();
+    done();
 	});
 	gulp.task('watchFont', ['fonts:build'], function (done) {
 		plugins.browserSync.reload();
@@ -36,23 +28,21 @@ module.exports = (gulp, options) => () => {
 		plugins.browserSync.reload();
 		done();
 	});
-	gulp.task('genBower', function(callback) {
-		plugins.sequence(['bower:assets', 'bower:scripts', 'bower:styles'],'styles:sass')(callback);
+	gulp.task('genNpm', function(callback) {
+		plugins.sequence(['npm:assets', 'npm:styles'],'styles:sass')(callback);
 	});
-	gulp.task('watchBower', ['genBower'], function (done) {
+	gulp.task('watchNpm', ['genNpm'], function (done) {
 		plugins.browserSync.reload();
 		done();
 	});
 
-	gulp.watch(options.scripts.bodyScriptSrc, ['watchBodyScripts']);
-	gulp.watch(options.scripts.headScriptSrc, ['watchHeadScripts']);
-	gulp.watch(options.scripts.pageScriptSrc, ['watchPageScripts']);
+  gulp.watch(options.scripts.src, ['watchScripts']);
 
 	gulp.watch(path.join(options.styles.componentsSrc + '/**/*.scss'), ['styles:sass-index']);
-	gulp.watch(["!" + options.styles.srcFolder + options.sprite.cssName, "!" + options.styles.srcFolder + options.bower.stylesFile, path.join(options.styles.srcFolder, '/**/*.{scss,sass}')], ['styles:sass', 'lint:styles']);
+	gulp.watch(["!" + options.styles.srcFolder + options.sprite.cssName, "!" + options.styles.srcFolder + options.npm.stylesFile, path.join(options.styles.srcFolder, '/**/*.{scss,sass}')], ['styles:sass', 'lint:styles']);
 
 	gulp.watch(options.fonts.src, ['watchFont']);
-	gulp.watch(options.bower.config, ['watchBower']);
+	gulp.watch(options.npm.config, ['watchNpm']);
 
 	gulp.watch(['!' + options.sprite.srcFolder + '{,/**}', options.images.src], ['watchImages']);
 

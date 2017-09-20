@@ -1,95 +1,75 @@
 'use strict';
 const plugins = require('./libs/plugins');
-// let jsHintErrorReporter = require('./libs/jsHintErrorReporter');
-// let onError = require('./libs/onError');
-//
 
 module.exports = (gulp, options) => {
-// });
-// module.exports = function (gulp, options) {
 
-	// Assign options
-	const defaultOptions = require(__dirname + '/config.json');
-	options = plugins.deepAssign(defaultOptions, options);
+  // Assign options
+  const defaultOptions = require(__dirname + '/config.json');
+  options = Object.assign(defaultOptions, options);
 
-	 // Load tasks
+  // Load tasks
 
-	 // Bower tasks
-	 const bowerAssets = require('./tasks/bower/assets')(gulp, options);
-	 gulp.task("bower:assets", bowerAssets)
+  // Npm tasks
+  const npmAssets = require('./tasks/npm/assets')(gulp, options);
+  gulp.task("npm:assets", npmAssets);
+  const npmStyles = require('./tasks/npm/styles')(gulp, options);
+  gulp.task("npm:styles", npmStyles);
+  gulp.task('npm:build', plugins.sequence('npm:assets', 'npm:styles'));
 
-	 const bowerScripts = require('./tasks/bower/scripts')(gulp, options);
-	 gulp.task("bower:scripts", bowerScripts)
-	 const bowerStyles = require('./tasks/bower/styles')(gulp, options);
-	 gulp.task("bower:styles", bowerStyles)
-	 gulp.task('bower:build', plugins.sequence('bower:assets', 'bower:scripts', 'bower:styles'));
+  // Clean
+  const cleanNpm = require('./tasks/clean/npm')(gulp, options);
+  gulp.task('clean:npm', cleanNpm);
+  const cleanFonts = require('./tasks/clean/fonts')(gulp, options);
+  gulp.task('clean:fonts', cleanFonts);
+  const cleanImages = require('./tasks/clean/images')(gulp, options);
+  gulp.task('clean:images', cleanImages);
+  const cleanScripts = require('./tasks/clean/scripts')(gulp, options);
+  gulp.task('clean:scripts', cleanScripts);
+  const cleanStyles = require('./tasks/clean/styles')(gulp, options);
+  gulp.task('clean:styles', cleanStyles);
+  gulp.task('clean:all', plugins.sequence('clean:npm', 'clean:fonts', 'clean:images', 'clean:scripts', 'clean:styles'));
 
-	 // Clean
-	 const cleanBower = require('./tasks/clean/bower')(gulp, options);
-	 gulp.task('clean:bower', cleanBower);
-	 const cleanFonts = require('./tasks/clean/fonts')(gulp, options);
-	 gulp.task('clean:fonts', cleanFonts);
-	 const cleanImages = require('./tasks/clean/images')(gulp, options);
-	 gulp.task('clean:images', cleanImages);
-	 const cleanScripts = require('./tasks/clean/scripts')(gulp, options);
-	 gulp.task('clean:scripts', cleanScripts);
-	 const cleanSprite = require('./tasks/clean/sprite')(gulp, options);
-	 gulp.task('clean:sprite', cleanSprite);
-	 const cleanStyles = require('./tasks/clean/styles')(gulp, options);
-	 gulp.task('clean:styles', cleanStyles);
-	 gulp.task('clean:all', plugins.sequence('clean:bower', 'clean:fonts', 'clean:images', 'clean:scripts', 'clean:styles', 'clean:sprite'));
+  // Fonts
+  const fontsBuild = require('./tasks/fonts/build')(gulp, options);
+  gulp.task('fonts:build', fontsBuild);
 
-	 // Fonts
-	 const fontsBuild = require('./tasks/fonts/build')(gulp, options);
-	 gulp.task('fonts:build', fontsBuild);
+  // Images
+  const imagesImagemin = require('./tasks/images/imagemin')(gulp, options);
+  gulp.task('images:imagemin', imagesImagemin);
 
-	 // Images
-	 const imagesGenerateSmallSpriteImages = require('./tasks/images/generate-small-sprite-images')(gulp, options);
-	 gulp.task('images:generate-small-sprite-images', imagesGenerateSmallSpriteImages);
-	 const imagesImagemin = require('./tasks/images/imagemin')(gulp, options);
-	 gulp.task('images:imagemin', imagesImagemin);
-	 const imagesSprite = require('./tasks/images/sprite')(gulp, options);
-	 gulp.task('images:sprite', ['images:generate-small-sprite-images'], imagesSprite);
+  // Lint
+  const lintScripts = require('./tasks/lint/scripts')(gulp, options);
+  gulp.task('lint:scripts', lintScripts);
+  const lintStyles = require('./tasks/lint/styles')(gulp, options);
+  gulp.task('lint:styles', lintStyles);
 
-	 // Lint
-	 const lintScripts = require('./tasks/lint/scripts')(gulp, options);
-	 gulp.task('lint:scripts', lintScripts);
-	 const lintStyles = require('./tasks/lint/styles')(gulp, options);
-	 gulp.task('lint:styles', lintStyles);
+  // Scripts
+  const scriptsStealScripts = require('./tasks/scripts/steal')(gulp, options);
+  gulp.task('scripts:steal', scriptsStealScripts);
+  gulp.task('scripts:build', ['scripts:steal', 'lint:scripts']);
 
-	 // Scripts
-	 const scriptsBodyScripts = require('./tasks/scripts/bodyscripts')(gulp, options);
-	 gulp.task('scripts:bodyscripts', scriptsBodyScripts);
-	 const scriptsHeadScripts = require('./tasks/scripts/headscripts')(gulp, options);
-	 gulp.task('scripts:headscripts', scriptsHeadScripts);
-	 const scriptsPageScripts = require('./tasks/scripts/pagescripts')(gulp, options);
-	 gulp.task('scripts:pagescripts', scriptsPageScripts);
-	 gulp.task('scripts:build', ['scripts:bodyscripts', 'scripts:headscripts', 'scripts:pagescripts', 'lint:scripts']);
+  // Styles
+  const stylesSassIndex = require('./tasks/styles/sass-index')(gulp, options);
+  gulp.task('styles:sass-index', stylesSassIndex);
+  const stylesSass = require('./tasks/styles/sass')(gulp, options);
+  gulp.task('styles:sass', stylesSass);
+  gulp.task('styles:build', plugins.sequence('styles:sass-index', 'styles:sass', 'lint:styles'));
 
-	 // Styles
-	 const stylesSassIndex = require('./tasks/styles/sass-index')(gulp, options);
-	 gulp.task('styles:sass-index', stylesSassIndex);
-	 const stylesSass = require('./tasks/styles/sass')(gulp, options);
-	 gulp.task('styles:sass', stylesSass);
-	 gulp.task('styles:build', plugins.sequence('styles:sass-index', 'styles:sass', 'lint:styles'));
+  // Utilities
+  const utilitiesBrowserSync = require('./tasks/utilities/browser-sync')(gulp, options);
+  gulp.task('utilities:browser-sync', utilitiesBrowserSync);
+  const utilitiesWatch = require('./tasks/utilities/watch')(gulp, options);
+  gulp.task('utilities:watch', utilitiesWatch);
 
-	 // require('./tasks/styles/build')(gulp, options);
+  // Combined tasks:
+  // Build
+  gulp.task('build', plugins.sequence('clean:all', 'npm:build', 'styles:build', ['fonts:build', 'images:imagemin', 'scripts:build']));
 
-	// Utilities
-	const utilitiesBrowserSync = require('./tasks/utilities/browser-sync')(gulp, options);
-	gulp.task('utilities:browser-sync', utilitiesBrowserSync);
-	const utilitiesWatch = require('./tasks/utilities/watch')(gulp, options);
-	gulp.task('utilities:watch', utilitiesWatch);
+  // Default
+  gulp.task('default', plugins.sequence('build', 'utilities:watch', 'utilities:browser-sync'));
 
-	 // Combined tasks:
-	 // Build
-	 gulp.task('build', plugins.sequence('clean:all', 'bower:build', 'images:sprite', 'styles:build', ['fonts:build', 'images:imagemin', 'scripts:build']));
+  // Test
+  gulp.task('test', ['lint:scripts', 'lint:styles']);
 
-	 // Default
-	 gulp.task('default', plugins.sequence('build', 'utilities:watch', 'utilities:browser-sync'));
-
-	 // Test
-	 gulp.task('test', ['lint:scripts', 'lint:styles']);
-
-	return options;
+  return options;
 };

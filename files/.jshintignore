@@ -1,4 +1,4 @@
-bower_components/**/*
+node_modules/**/*
 vendor/**/*
 **/*.min.js
 **/*jquery*.js
