@@ -13,7 +13,7 @@ module.exports = (gulp) => {
 
   if(config) {
     console.log(`Using config ${config.filePath}`);
-    options = Object.assign(defaultOptions, options);
+    options = Object.assign(defaultOptions, config.config);
   }
   else {
     process.on('exit', (code) => {
