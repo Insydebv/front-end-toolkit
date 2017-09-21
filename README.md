@@ -29,7 +29,7 @@ If you don't have some of the required files, the toolkit will create them for y
 * `.jshintignore`
 * `.stylelintignore`
 * `.stylelintrc`
-* `gulpconfig.json`
+* `.webdevtoolkitrc`
 * `gulpfile.js`
 
 #### 5. Load the toolkit in your Gulpfile
@@ -39,11 +39,8 @@ If you don't have some of the required files, the toolkit will create them for y
 // Require Gulp
 var gulp = require('gulp');
 
-// Optional json file with configuration
-var options = require('./gulpconfig.json');
-
 // Import front-end toolkit tasks
-require('webdev-toolkit')(gulp, options);
+require('webdev-toolkit')(gulp);
 ```
 
 ## Features
@@ -97,18 +94,17 @@ For example: `gulp build --production`
 ## Options
 You can configure the toolkit by setting options in `.webdevtoolkitrc` or a `webdevtoolkit` key in your `package.json`.
 ```json
-// gulpconfig.json
+// .webdevtoolkitrc
 
 // Set options
 {
   "appRoot"            	: "site/",
-    "bower": {
+    "npm": {
       "assetFileTypes"	: "png,gif,svg,jpeg,jpg,woff,woff2,eot,ttf,otf",
-      "scriptFile"    	: "bower.min.js",
-      "stylesFile"    	: "_bower.scss",
-      "src"           	: "bower_components",
+      "stylesFile"    	: "_bundle.scss",
+      "src"           	: "node_modules",
       "assetsDest"    	: "site/dist",
-      "config"          : "bower.json"
+      "config"          : "package.json"
   }
 }
 ```
@@ -118,10 +114,10 @@ You can configure the toolkit by setting options in `.webdevtoolkitrc` or a `web
 **appRoot**|`"site/"`|Main dist folder followed by a forward slash
 **npm**|`object`|
 assetFileTypes|`"png,gif,svg,jpeg,jpg,woff,woff2,eot,ttf,otf"`|Comma separated list of filetypes
-stylesFile    |`"_dist.scss"`|Filename for concatenated bower styles
-src           |`"node_modules"`|Location of bower components
-assetsDest    |`"site/dist"`|Where to copy bower assets for distribution
-config    |`"package.json"`|Where your Bower config is located
+stylesFile    |`"_dist.scss"`|Filename for concatenated npm styles
+src           |`"node_modules"`|Location of node modules
+assetsDest    |`"site/dist"`|Where to copy static assets for distribution
+config    |`"package.json"`|Package config
 **fonts**|`object`|
 src           |`"src/fonts/**/*"`|Fonts source dir
 dest|`"site/fonts"`|Distribution fonts dir
@@ -136,9 +132,7 @@ srcFolder        |`"src/styles"`|Stylesheets source folder
 componentsSrc|`"src/styles/components"`|Location of styles components
 componentsIgnore|`[]`|Indexable components to ignore, handy if you dont have any components at all.
 dest         |`"site/css"`|Distribution css dir
-lintConfig     |`"node_modules/scss-styleguide/.sass-lint.yml"`|Sass-lint config
-lintIgnore|`["src/styles/_bower.scss", "src/styles/_sprite.scss"]`|Glob with files to be ignored by sass-lint
-includePaths   |`["bower_components"]`|Sass includepaths
+includePaths   |`["node_modules"]`|Sass includepaths
 **utilities**|`object`|
 browserSyncHtdocs |`"d:\\php\\"`|Location of Apache htdocs for Browser Sync
 browserSyncOpen |`"external"`| Decide which URL to open automatically when Browsersync starts.
@@ -175,7 +169,7 @@ You can configure Steal by setting a steal property in `package.json`.
 }
 ```
 ##### Steal-tools - [the builder](https://stealjs.com/docs/steal-tools.html)
-Steal-tools is configured by setting the Stealtools property in `gulpconfig.json`.
+Steal-tools is configured by setting the Stealtools property in `.webdevtoolkitrc`.
 ```json
 {
   "stealTools": {
