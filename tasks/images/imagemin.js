@@ -4,10 +4,10 @@
 const plugins = require('../../libs/plugins');
 
 module.exports = (gulp, options) => () => {
-  return gulp.src([options.images.src, '!' + options.sprite.srcFolder + '{,/**}'])
+  return gulp.src(options.images.src)
     .pipe(plugins.newer(options.images.dest))
     .pipe(plugins.imagemin([
-      imagemin.svgo({
+      plugins.imagemin.svgo({
         plugins: [
           {removeViewBox: true},
           {cleanupIDs: false}
