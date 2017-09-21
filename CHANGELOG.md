@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.0.1 
+## 2.1.0 
 - Config via .webdevtoolkitrc file or package.json.
 - Update readme.
 
