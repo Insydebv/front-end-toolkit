@@ -1,4 +1,4 @@
-// // Watch for changes
+// Watch for changes
 'use strict';
 const plugins = require('../../libs/plugins');
 const path = require('path');
@@ -8,7 +8,6 @@ module.exports = (gulp, options) => () => {
 
 	// Reload browser after tasks are finished
 	// This will be easier in gulp 4.x.x
-	/* steal watcher */
 	gulp.task('watchScripts', ['lint:scripts'], function (done) {
     plugins.browserSync.reload();
     done();
@@ -18,13 +17,6 @@ module.exports = (gulp, options) => () => {
 		done();
 	});
 	gulp.task('watchImages', ['images:imagemin'], function (done) {
-		plugins.browserSync.reload();
-		done();
-	});
-	gulp.task('genSprite', function(callback) {
-		plugins.sequence('images:generate-small-sprite-images', 'images:sprite', 'styles:sass')(callback);
-	});
-	gulp.task('watchSprite', ['genSprite'], function (done) {
 		plugins.browserSync.reload();
 		done();
 	});
@@ -39,14 +31,13 @@ module.exports = (gulp, options) => () => {
   gulp.watch(options.scripts.src, ['watchScripts']);
 
 	gulp.watch(path.join(options.styles.componentsSrc + '/**/*.scss'), ['styles:sass-index']);
-	gulp.watch(["!" + options.styles.srcFolder + options.sprite.cssName, "!" + options.styles.srcFolder + options.npm.stylesFile, path.join(options.styles.srcFolder, '/**/*.{scss,sass}')], ['styles:sass', 'lint:styles']);
+	gulp.watch(["!" + options.styles.srcFolder + options.npm.stylesFile, path.join(options.styles.srcFolder, '/**/*.{scss,sass}')], ['styles:sass', 'lint:styles']);
 
 	gulp.watch(options.fonts.src, ['watchFont']);
+
 	gulp.watch(options.npm.config, ['watchNpm']);
 
 	gulp.watch(['!' + options.sprite.srcFolder + '{,/**}', options.images.src], ['watchImages']);
-
-	gulp.watch(options.sprite.srcFolder + '/*' + options.sprite.retinaSuffix + '.png', ['watchSprite']);
 
 	gulp.watch(options.utilities.watchSrc).on('change', plugins.browserSync.reload);
 };
