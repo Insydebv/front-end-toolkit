@@ -24,7 +24,11 @@ $ npm install webdev-toolkit --save-dev
 ```
 If you don't have some of the required files, the toolkit will create them for you:
 * `.babelrc`
+* `.eslintignore`
+* `.eslintrc`
 * `.jshintignore`
+* `.stylelintignore`
+* `.stylelintrc`
 * `gulpconfig.json`
 * `gulpfile.js`
 
@@ -43,7 +47,7 @@ require('webdev-toolkit')(gulp, options);
 ```
 
 ## Features
-This toolkit provides your total assets pipeline. From gathering files from NPM dependencies, minifying images and scripts to generating CSS from Sass and injecting it into your browser with Browser Sync. 
+This toolkit provides your total assets pipeline. From gathering files from NPM dependencies, bundling Javascript, minifying images and scripts to generating CSS from Sass and injecting it into your browser with Browser Sync. 
 This leaves you with time to focus on the things that really matter!
 * Loads individual tasks from the webdev-toolkit for use in your project.
 * Easily integrates into your gulpfile.js without breaking your existing tasks.
@@ -51,7 +55,6 @@ This leaves you with time to focus on the things that really matter!
 
 ## Project structure
 We suggest using the following default folder layout. You can change it to suit your own structure by setting the correct paths in configuration.
-* bower_components `bower.src`
 * node_modules
 * site `appRoot`
   - css `styles.dest`
@@ -62,16 +65,15 @@ We suggest using the following default folder layout. You can change it to suit 
       - etc. `npm.assetFileTypes`
   - images `images.dest`
     - file.jpg
-    - sprite.png `sprite.imgName`
-    - sprite@2x.png `sprite.retinaImgName`
+    - file.png
+    - etc.
 * src
   - images `images.src`
-  - script
-    - file.js
+  - script `scripts.src`
+    - app.js `put this in the 'main' property of your 'package.json' for StealJS.`
     - folder
       - file_a.js
       - file_b.js
-		- these get concatenated into folder.min.js
       - etc. 
   - styles `styles.srcFolder`
     - components `styles.componentsSrc`
@@ -114,13 +116,12 @@ You can configure the toolkit by setting options in `gulpconfig.json`
 **Property**|**Default value**|**Description**
 -----|-----|-----
 **appRoot**|`"site/"`|Main dist folder followed by a forward slash
-**bower**|`object`|
+**npm**|`object`|
 assetFileTypes|`"png,gif,svg,jpeg,jpg,woff,woff2,eot,ttf,otf"`|Comma separated list of filetypes
-scriptFile    |`"bower.min.js"`|Filename for concatenated bower scripts
-stylesFile    |`"_bower.scss"`|Filename for concatenated bower styles
-src           |`"bower_components"`|Location of bower components
+stylesFile    |`"_dist.scss"`|Filename for concatenated bower styles
+src           |`"node_modules"`|Location of bower components
 assetsDest    |`"site/dist"`|Where to copy bower assets for distribution
-config    |`"bower.json"`|Where your Bower config is located
+config    |`"package.json"`|Where your Bower config is located
 **fonts**|`object`|
 src           |`"src/fonts/**/*"`|Fonts source dir
 dest|`"site/fonts"`|Distribution fonts dir
@@ -142,6 +143,7 @@ includePaths   |`["bower_components"]`|Sass includepaths
 browserSyncHtdocs |`"d:\\php\\"`|Location of Apache htdocs for Browser Sync
 browserSyncOpen |`"external"`| Decide which URL to open automatically when Browsersync starts.
 watchSrc |`"templates/**/*.html"`|Glob with additional folders to watch, for example your template files or php views.
+**stealTools**|`object`|Options for [Steal-Tools Build](https://stealjs.com/docs/steal-tools.build.html)
 
 ### Autoprefixer
 Autoprefixer uses Browserslist, so you can specify the browsers you want to target in your project by queries like last 2 versions or > 5%.
@@ -154,29 +156,69 @@ You can configure autoprefixer by setting the `browserslist` key in your `packag
   ]
 }
 ```
-### Bower
-Configuring bower can be done via `bower.json` and `.bowerrc` files in the root of your project.
-### Babel
-By default scripts are parsed by `gulp-babel`. 
-You can supply a configuration by creating a `.babelrc` file in the root of your project.
+### Front-end dependencies
+Front-end dependencies are loaded via NPM, so install them into your project by running:
+``$ npm install name-of-package --save``
+#### Module loading with StealJS
+StealJS is a module loader and builder that will help you create the next great app. It's designed to simplify dependency management while being extremely powerful and flexible.
+StealJS is composed of two parts.
+##### Steal - [the module loader](https://stealjs.com/docs/steal.html)
+You can configure Steal by setting a steal property in `package.json`.
 ```json
 {
-  "presets": ["es2015-without-strict"],
-  "compact": true,
-  "ignore": [],
-  "only": []
-}
-```
-### Jshint
-Scripts are run through Jshint. You can configure ignores by providing a `.jshintignore` file in the root of your project.
-
-### Sass Lint
-Styles are linted by Sass-lint based on the default rules from https://github.com/Insydebv/scss-styleguide.
-You can provide your own configuration by setting the path to your `.sass-lint.yml` in `styles.lintConfig` in your json configuration file.
-```json
-{
-  "styles": {
-    "lintConfig" : "node_modules/scss-styleguide/.sass-lint.yml"
+  "steal": {
+    "bundle": "src/script/*.js",
+    "paths": {
+      "yii2/*": "vendor/yiisoft/yii2/assets/*.js"
+    }
   }
 }
 ```
+##### Steal-tools - [the builder](https://stealjs.com/docs/steal-tools.html)
+Steal-tools is configured by setting the Stealtools property in `gulpconfig.json`.
+```json
+{
+  "stealTools": {
+    "bundleAssets": true,
+    "dest": "site/dist",
+    "bundleSteal": false,
+    "sourceMaps": true,
+    "minify": true,
+    "debug": true,
+    "quiet": false,
+    "maxBundleRequests": 3,
+    "maxMainRequests": 3
+  }
+}
+```
+
+#### Static assets
+You can overwrite the main property of a package in your package.json, to get for example some fonts or images into your `npm.dist` folder. 
+When a stylesheet is included, the relative paths to background-images and font-path etc. will be rewritten to point to the `npm.dist` folder. Styles will be bundled in `npm.stylesFile`.  
+```json
+{
+  "dependencies": {
+    "slick-carousel": "git://github.com/kenwheeler/slick.git#3ab76ec"
+  },
+  "overrides": {
+    "slick-carousel": {
+      "main": [
+        "slick/css/theme.css",
+        "slick/fonts/**/*",
+        "slick/ajax-loader.gif"
+      ]
+    }
+  }
+}
+```
+
+### ESlint
+Scripts are linted with ESlint. The pluggable linting utility for JavaScript and JSX. Configuration is done via * `.eslintrc` and ignores can be added in * `.eslintignore`.
+
+### stylelint
+Styles are linted by stylelint. A mighty, modern CSS linter and fixer that helps you avoid errors and enforce consistent conventions in your stylesheets.
+Finding and loading of your configuration object is done with cosmiconfig. Starting from the current working directory, it will look for the following possible sources, in this order:
+
+* `stylelint property in package.json`
+* `.stylelintrc file`
+* `stylelint.config.js file exporting a JS object`
