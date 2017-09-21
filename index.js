@@ -1,11 +1,29 @@
 'use strict';
 const plugins = require('./libs/plugins');
+const rcfile = require("rc-config-loader");
+let options = {};
 
-module.exports = (gulp, options) => {
+module.exports = (gulp) => {
 
   // Assign options
-  const defaultOptions = require(__dirname + '/config.json');
-  options = Object.assign(defaultOptions, options);
+  const defaultOptions = require(__dirname + '/defaultconfig.json');
+  const config = rcfile('webdevtoolkit', {
+    packageJSON: true,
+  });
+
+  if(config) {
+    console.log(`Using config ${config.filePath}`);
+    options = Object.assign(defaultOptions, options);
+  }
+  else {
+    process.on('exit', (code) => {
+      console.error(`ERROR: Could not load config. Make sure you have a valid configuration:
+- .webdevtoolkitrc in the root of your project
+- webdevtoolkit key in package.json
+      `);
+    });
+    process.exit(1);
+  }
 
   // Load tasks
 

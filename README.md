@@ -95,7 +95,7 @@ Run tasks with the `--production` handle on your build system. This ensures that
 For example: `gulp build --production`
 
 ## Options
-You can configure the toolkit by setting options in `gulpconfig.json`
+You can configure the toolkit by setting options in `.webdevtoolkitrc` or a `webdevtoolkit` key in your `package.json`.
 ```json
 // gulpconfig.json
 
