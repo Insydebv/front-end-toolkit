@@ -15,4 +15,4 @@ copyFileSync('files/gulpfile.js', '../../gulpfile.js');
 copyFileSync('files/.eslintignore', '../../.eslintignore');
 copyFileSync('files/.eslintrc', '../../.eslintrc');
 copyFileSync('files/.stylelintignore', '../../.stylelintignore');
-copyFileSync('files/.stylelintrc', '../../.stylelintrc');
+copyFileSync('files/stylelint.config.js', '../../stylelint.config.js');

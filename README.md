@@ -28,7 +28,7 @@ If you don't have some of the required files, the toolkit will create them for y
 * `.eslintrc`
 * `.jshintignore`
 * `.stylelintignore`
-* `.stylelintrc`
+* `stylelint.config.js`
 * `.webdevtoolkitrc`
 * `gulpfile.js`
 
