@@ -37,7 +37,7 @@ module.exports = (gulp, options) => () => {
 
 	gulp.watch(options.npm.config, ['watchNpm']);
 
-	gulp.watch(['!' + options.sprite.srcFolder + '{,/**}', options.images.src], ['watchImages']);
+	gulp.watch(options.images.src, ['watchImages']);
 
 	gulp.watch(options.utilities.watchSrc).on('change', plugins.browserSync.reload);
 };
