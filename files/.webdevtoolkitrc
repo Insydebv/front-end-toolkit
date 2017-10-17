@@ -32,14 +32,23 @@
     "watchSrc"          : "templates/**/*.html"
   },
   "stealTools": {
-    "bundleAssets": true,
-    "dest": "site/dist",
-    "bundleSteal": false,
-    "sourceMaps": true,
-    "minify": true,
-    "debug": true,
-    "quiet": false,
-    "maxBundleRequests": 3,
-    "maxMainRequests": 3
+    "dev": {
+      "filter": [
+        "vendor/**/*"
+      ],
+      "dest": "site/dist",
+      "sourceMaps": true,
+      "minify": false,
+      "ignore": [
+        "jquery"
+      ]
+    },
+    "production": {
+      "dest": "site/dist",
+      "bundleSteal": false,
+      "sourceMaps": true,
+      "maxBundleRequests": 3,
+      "maxMainRequests": 3
+    }
   }
 }

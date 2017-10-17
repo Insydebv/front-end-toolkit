@@ -8,10 +8,10 @@ module.exports = (gulp, options) => () => {
 
 	// Reload browser after tasks are finished
 	// This will be easier in gulp 4.x.x
-	gulp.task('watchScripts', ['lint:scripts'], function (done) {
+  gulp.task('watchScripts', ['steal:build', 'lint:scripts'], function (done) {
     plugins.browserSync.reload();
     done();
-	});
+  });
 	gulp.task('watchFont', ['fonts:build'], function (done) {
 		plugins.browserSync.reload();
 		done();

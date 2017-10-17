@@ -62,9 +62,9 @@ module.exports = (gulp) => {
   gulp.task('lint:styles', lintStyles);
 
   // Scripts
-  const scriptsStealScripts = require('./tasks/scripts/steal')(gulp, options);
-  gulp.task('scripts:steal', scriptsStealScripts);
-  gulp.task('scripts:build', ['scripts:steal', 'lint:scripts']);
+  const scriptsStealBuild = require('./tasks/steal/build')(gulp, options);
+  gulp.task('steal:build', scriptsStealBuild);
+  gulp.task('scripts:build', ['steal:build', 'lint:scripts']);
 
   // Styles
   const stylesSassIndex = require('./tasks/styles/sass-index')(gulp, options);
