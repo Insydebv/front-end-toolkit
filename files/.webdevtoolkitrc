@@ -32,23 +32,6 @@
     "watchSrc"          : "templates/**/*.html"
   },
   "stealTools": {
-    "dev": {
-      "filter": [
-        "vendor/**/*"
-      ],
-      "dest": "site/dist",
-      "sourceMaps": true,
-      "minify": false,
-      "ignore": [
-        "jquery"
-      ]
-    },
-    "production": {
-      "dest": "site/dist",
-      "bundleSteal": false,
-      "sourceMaps": true,
-      "maxBundleRequests": 3,
-      "maxMainRequests": 3
-    }
+
   }
 }
