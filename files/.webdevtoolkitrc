@@ -32,6 +32,9 @@
     "watchSrc"          : "templates/**/*.html"
   },
   "stealTools": {
-
+    "dev": {
+    },
+    "production": {
+    }
   }
 }
