@@ -64,14 +64,14 @@ module.exports = (gulp) => {
   // Scripts
   const scriptsStealBuild = require('./tasks/steal/build')(gulp, options);
   gulp.task('steal:build', scriptsStealBuild);
-  gulp.task('scripts:build', ['steal:build', 'lint:scripts']);
+  gulp.task('scripts:build', ['lint:scripts', 'steal:build']);
 
   // Styles
   const stylesSassIndex = require('./tasks/styles/sass-index')(gulp, options);
   gulp.task('styles:sass-index', stylesSassIndex);
   const stylesSass = require('./tasks/styles/sass')(gulp, options);
   gulp.task('styles:sass', stylesSass);
-  gulp.task('styles:build', plugins.sequence('styles:sass-index', 'styles:sass', 'lint:styles'));
+  gulp.task('styles:build', plugins.sequence('lint:styles', 'styles:sass-index', 'styles:sass'));
 
   // Utilities
   const utilitiesBrowserSync = require('./tasks/utilities/browser-sync')(gulp, options);
