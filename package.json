@@ -38,7 +38,7 @@
     "rework-plugin-url": "^1.1.0",
     "sass-index": "^1.0.1",
     "slash": "^1.0.0",
-    "steal-tools": "^1.8.3",
+    "steal-tools": "^1.9.1",
     "stylelint-formatter-pretty": "^1.0.3"
   },
   "scripts": {
