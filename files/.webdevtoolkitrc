@@ -32,6 +32,7 @@
     "watchSrc"          : "templates/**/*.html"
   },
   "stealTools": {
+    "devBundleWatch": ["vendor/**/*.js"],
     "dev": {
     },
     "production": {

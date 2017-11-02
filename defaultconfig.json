@@ -31,5 +31,11 @@
     "browserSyncOpen"   : "external",
     "watchSrc"          : "templates/**/*.html"
   },
-  "stealTools": {}
+  "stealTools": {
+    "devBundleWatch": ["vendor/**/*.js"],
+    "dev": {
+    },
+    "production": {
+    }
+  }
 }

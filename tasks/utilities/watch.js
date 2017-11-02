@@ -8,7 +8,11 @@ module.exports = (gulp, options) => () => {
 
 	// Reload browser after tasks are finished
 	// This will be easier in gulp 4.x.x
-  gulp.task('watchScripts', ['steal:build', 'lint:scripts'], function (done) {
+  gulp.task('watchScripts', ['lint:scripts'], function (done) {
+    plugins.browserSync.reload();
+    done();
+  });
+  gulp.task('watchVendorScripts', ['steal:build'], function (done) {
     plugins.browserSync.reload();
     done();
   });
@@ -29,6 +33,7 @@ module.exports = (gulp, options) => () => {
 	});
 
   gulp.watch(options.scripts.src, ['watchScripts']);
+  gulp.watch(options.stealTools.devBundleWatch, ['watchVendorScripts']);
 
 	gulp.watch(path.join(options.styles.componentsSrc + '/**/*.scss'), ['styles:sass-index']);
 	gulp.watch(["!" + options.styles.srcFolder + options.npm.stylesFile, path.join(options.styles.srcFolder, '/**/*.{scss,sass}')], ['styles:sass', 'lint:styles']);
