@@ -4,6 +4,7 @@
   "description": "Toolkit for creating and working with assets for web projects.",
   "main": "index.js",
   "dependencies": {
+    "babel-core": "^6.26.0",
     "beepbeep": "^1.2.1",
     "browser-sync": "^2.23.5",
     "deep-assign": "^2.0.0",
