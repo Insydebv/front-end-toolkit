@@ -39,7 +39,6 @@
     "sass-index": "^1.0.1",
     "slash": "^1.0.0",
     "steal-tools": "^1.11.3",
-    "stylelint": "^8.4.0",
     "stylelint-formatter-pretty": "^1.0.3"
   },
   "scripts": {
