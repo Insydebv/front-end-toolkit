@@ -11,5 +11,8 @@ module.exports = (gulp, options) => () => {
     .pipe(plugins.plumber())
     .pipe(plugins.eslint())
     .pipe(plugins.eslint.format())
-    .pipe(plugins.util.env.production ? plugins.eslint.failAfterError() : plugins.util.noop());
+    .pipe(plugins.util.env.production ? plugins.eslint.failAfterError() : plugins.util.noop())
+    .on('error', function () {
+      plugins.util.env.production ? process.exit(1) : plugins.util.noop()
+    });
 };
