@@ -10,8 +10,7 @@ function copyFileSync(source, target) {
 }
 
 copyFileSync('files/.webdevtoolkitrc', '../../.webdevtoolkitrc');
-copyFileSync('files/gulpfile.js', '../../gulpfile.js');
+copyFileSync('files/gulpfile.js', '../../gulpfile.babel.js');
 copyFileSync('files/.eslintignore', '../../.eslintignore');
 copyFileSync('files/.eslintrc', '../../.eslintrc');
-copyFileSync('files/.stylelintignore', '../../.stylelintignore');
 copyFileSync('files/stylelint.config.js', '../../stylelint.config.js');
