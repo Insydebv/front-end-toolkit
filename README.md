@@ -160,12 +160,34 @@ StealJS is composed of two parts.
 You can configure Steal by setting a steal property in `package.json`.
 ```json
 {
-  "steal": {
-    "bundle": "src/script/*.js",
-    "paths": {
-      "yii2/*": "vendor/yiisoft/yii2/assets/*.js"
+   "steal": {
+      "bundle": "src/script/*.js",
+      "paths": {
+        "paths": {
+          "vendor": "vendor"
+        }
+      },
+      "babelOptions": {},
+      "meta": {
+        "jquery": {
+          "format": "global",
+          "exports": "jQuery",
+          "build": false
+        }
+      },
+      "envs": {
+        "build-development": {
+          "map": {
+            "jquery": "@empty"
+          }
+        },
+        "window-production": {
+          "paths": {
+            "jquery": "//code.jquery.com/jquery-3.3.1.min.js"
+          }
+        }
+      }
     }
-  }
 }
 ```
 ##### Steal-tools - [the builder](https://stealjs.com/docs/steal-tools.html)
@@ -173,15 +195,25 @@ Steal-tools is configured by setting the Stealtools property in `.webdevtoolkitr
 ```json
 {
   "stealTools": {
-    "bundleAssets": true,
-    "dest": "site/dist",
-    "bundleSteal": false,
-    "sourceMaps": true,
-    "minify": true,
-    "debug": true,
-    "quiet": false,
-    "maxBundleRequests": 3,
-    "maxMainRequests": 3
+    "devBundleWatch": ["vendor/**/*.js"],
+    "dev": {
+      "filter": [
+        "vendor/**/*"
+      ],
+      "dest": "site/dist",
+      "sourceMaps": true,
+      "minify": false
+    },
+    "production": {
+      "dest": "site/dist",
+      "bundleSteal": false,
+      "sourceMaps": true,
+      "maxBundleRequests": 3,
+      "maxMainRequests": 3,
+      "ignore": [
+        "jquery"
+      ]
+    }
   }
 }
 ```
