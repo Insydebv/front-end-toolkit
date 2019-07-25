@@ -27,7 +27,7 @@ module.exports = (gulp, options) => () => {
 	gulp.task('genNpm', function(callback) {
 		gulp.series(['npm:assets', 'npm:styles'],'styles:sass')(callback);
 	});
-	gulp.task('watchNpm', ['genNpm'], function (done) {
+	gulp.task('watchNpm', gulp.series('genNpm'), function (done) {
 		plugins.browserSync.reload();
 		done();
 	});
