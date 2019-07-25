@@ -45,7 +45,7 @@ module.exports = (gulp) => {
   gulp.task('clean:scripts', cleanScripts);
   const cleanStyles = require('./tasks/clean/styles')(gulp, options);
   gulp.task('clean:styles', cleanStyles);
-  gulp.task('clean:all', plugins.sequence('clean:npm', 'clean:fonts', 'clean:images', 'clean:scripts', 'clean:styles'));
+  gulp.task('clean:all', gulp.series('clean:npm', 'clean:fonts', 'clean:images', 'clean:scripts', 'clean:styles'));
 
   // Fonts
   const fontsBuild = require('./tasks/fonts/build')(gulp, options);
@@ -71,7 +71,7 @@ module.exports = (gulp) => {
   gulp.task('styles:sass-index', stylesSassIndex);
   const stylesSass = require('./tasks/styles/sass')(gulp, options);
   gulp.task('styles:sass', stylesSass);
-  gulp.task('styles:build', plugins.sequence('lint:styles', 'styles:sass-index', 'styles:sass'));
+  gulp.task('styles:build', gulp.series('lint:styles', 'styles:sass-index', 'styles:sass'));
 
   // Utilities
   const utilitiesBrowserSync = require('./tasks/utilities/browser-sync')(gulp, options);
@@ -81,10 +81,10 @@ module.exports = (gulp) => {
 
   // Combined tasks:
   // Build
-  gulp.task('build', plugins.sequence('clean:all', 'npm:build', 'styles:build', ['fonts:build', 'images:imagemin', 'scripts:build']));
+  gulp.task('build', gulp.series('clean:all', 'npm:build', 'styles:build', ['fonts:build', 'images:imagemin', 'scripts:build']));
 
   // Default
-  gulp.task('default', plugins.sequence('build', 'utilities:watch', 'utilities:browser-sync'));
+  gulp.task('default', gulp.series('build', 'utilities:watch', 'utilities:browser-sync'));
 
   // Test
   gulp.task('test', ['lint:scripts', 'lint:styles']);
