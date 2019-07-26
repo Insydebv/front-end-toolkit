@@ -1,48 +1,21 @@
-// Watch for changes
+// // Watch for changes
 'use strict';
 const plugins = require('../../libs/plugins');
 const path = require('path');
-
-// Watch for changes
-module.exports = (gulp, options) => () => {
-
-	// Reload browser after tasks are finished
-	// This will be easier in gulp 4.x.x
-  gulp.task('watchScripts', ['lint:scripts'], function (done) {
-    plugins.browserSync.reload();
-    done();
-  });
-  gulp.task('watchVendorScripts', ['steal:build'], function (done) {
-    plugins.browserSync.reload();
-    done();
-  });
-	gulp.task('watchFont', ['fonts:build'], function (done) {
-		plugins.browserSync.reload();
-		done();
-	});
-	gulp.task('watchImages', ['images:imagemin'], function (done) {
-		plugins.browserSync.reload();
-		done();
-	});
-	gulp.task('genNpm', function(callback) {
-		plugins.sequence(['npm:assets', 'npm:styles'],'styles:sass')(callback);
-	});
-	gulp.task('watchNpm', ['genNpm'], function (done) {
-		plugins.browserSync.reload();
-		done();
-	});
-
-  gulp.watch(options.scripts.src, ['watchScripts']);
-  gulp.watch(options.stealTools.devBundleWatch, ['watchVendorScripts']);
-
-	gulp.watch(path.join(options.styles.componentsSrc + '/**/*.scss'), ['styles:sass-index']);
-	gulp.watch(["!" + options.styles.srcFolder + options.npm.stylesFile, path.join(options.styles.srcFolder, '/**/*.{scss,sass}')], ['styles:sass', 'lint:styles']);
-
-	gulp.watch(options.fonts.src, ['watchFont']);
-
-	gulp.watch(options.npm.config, ['watchNpm']);
-
-	gulp.watch(options.images.src, ['watchImages']);
-
-	gulp.watch(options.utilities.watchSrc).on('change', plugins.browserSync.reload);
+// Reload  browser
+function reloadBrowser(done) {
+	plugins.browserSync.reload();
+	done();
+}
+module.exports = (gulp, options) => (done) => {
+	gulp.watch(options.scripts.src, gulp.series('lint:scripts'));
+	gulp.watch(options.stealTools.devBundleWatch, gulp.series('steal:build', reloadBrowser));
+	gulp.watch(options.styles.componentsSrc + '/**/*.scss'), gulp.series('styles:sass-index');
+	gulp.watch(["!" + options.styles.srcFolder + options.npm.stylesFile, options.styles.srcFolder + '/**/*.{scss,sass}'],
+		gulp.series('styles:sass', gulp.parallel('lint:styles', reloadBrowser))
+	);
+	gulp.watch(options.fonts.src, gulp.series('fonts:build', reloadBrowser));
+	gulp.watch(options.npm.config, gulp.series('npm:assets', 'npm:styles', 'styles:sass', reloadBrowser));
+	gulp.watch(options.images.src, gulp.series('images:imagemin', reloadBrowser));
+	gulp.watch(options.utilities.watchSrc).on('change', reloadBrowser);
 };
