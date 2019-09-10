@@ -17,5 +17,5 @@ module.exports = (gulp, options) => (done) => {
 	gulp.watch(options.fonts.src, gulp.series('fonts:build', reloadBrowser));
 	gulp.watch(options.npm.config, gulp.series('npm:assets', 'npm:styles', 'styles:sass', reloadBrowser));
 	gulp.watch(options.images.src, gulp.series('images:imagemin', reloadBrowser));
-	gulp.watch(options.utilities.watchSrc).on('change', reloadBrowser);
+	gulp.watch(options.utilities.watchSrc).on('change', gulp.series(reloadBrowser));
 };
